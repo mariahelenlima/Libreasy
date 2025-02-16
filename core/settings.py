@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'products',
+   # 'products',
+   'livros',
 ]
 
 #GRAPPELLI_ADMIN_TITLE = 'Libreasy' #colocar Libreasy como titulo de cima
@@ -126,43 +127,41 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Diretório onde os arquivos estáticos serão coletados
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Caso tenha uma pasta static na raiz do seu projeto
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#confgs da biblioteca jazzmin para estilizar o site
+# Configurações da biblioteca jazzmin para estilizar o site
+
 
 JAZZMIN_SETTINGS = {
-# title of the window (Will default to current_admin_site.site_title if absent or None)
-'site_title': 'Libreasy',
-# Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-'site_header': 'Libreasy',
-# Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-'site_brand': 'Libreasy',
+    'site_title': 'Libreasy',
+    'site_header': 'Libreasy',
+    'site_brand': 'Libreasy',
+    'site_logo': 'images/Libreasy_logo2.png',  # Caminho do logo dentro da pasta static
+    #'login_logo': 'images/Libreasy_logo.jpg',  # Logo usado na tela de login
+    'custom_css': 'css/custom.css',  # Adicione esta linha para carregar o CSS customizado
+    
+    
+    'icons': {
+        'auth': 'fas fa-users-cog',
+        'auth.user': 'fas fa-user',
+        'auth.Group': 'fas fa-users',
+        #'products.Brand': 'fas fa-copyright',
+        #'products.Category': 'fas fa-object-group',
+        #'products.Product': 'fas fa-box',
+        'livros.Editora': 'fas fa-copyright',
+        'livros.Genero': 'fas fa-object-group',
+        'livros.Livro': 'fas fa-box',
+    },
 
-'icons': {
-'auth': 'fas fa-users-cog',
-'auth.user': 'fas fa-user',
-'auth.Group': 'fas fa-users',
-'products.Brand': 'fas fa-copyright',
-'products.Category': 'fas fa-object-group',
-'products.Product': 'fas fa-box',
-},
-
-# Welcome text on the login screen
-'welcome_sign': 'Bem-vindo(a) ao Libreasy',
-
-# Copyright on the footer
-'copyright': 'PycodeBR LTDA',
-
-# List of model admins to search from the search bar, search bar omitted if excluded
-# If you want to use a single search field you dont need to use a list, you can use a simple string
-
-'search_model': ['products.Product',], #busca de produtos
-
-
-# Whether to show the UI customizer on the sidebar
-'show_ui_builder': True,
+    'welcome_sign': 'Bem-vindo(a) ao Libreasy',
+    'copyright': 'PycodeBR LTDA',
+    #'search_model': ['product.Product'],
+    'search_model': ['livro.Livro'],
+    'show_ui_builder': True,
 }

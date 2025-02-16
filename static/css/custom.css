@@ -1,0 +1,149 @@
+body{
+
+    background-color: #A6CCFF;
+
+}
+
+/* Ajuste para ocupar toda a altura da tela com um fundo azul */
+body.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #b2e2f9, #80d6ff); /* Gradiente de azul claro */
+    margin: 0;
+    padding: 0;
+}
+
+/* Ajuste na caixa de login para destaque sobre o fundo azul */
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    min-height: 450px;
+    background: hsl(0, 0%, 100%);  /* Mantém o fundo branco na caixa de login */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);  /* Sombra suave para a caixa */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Ajuste no logo */
+/* .login-logo img {
+    max-width: 180px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px;
+} */
+.login-logo img {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+/* .login-logo img {
+    width: 150px;  /* Tamanho fixo para garantir que fique um quadrado */
+    height: 150px;
+    border-radius: 50%; /* Transforma em um círculo */
+    object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
+    display: block;
+    margin: 0 auto 15px;
+    overflow: hidden;
+    border: 3px solid white; /* Opcional: borda branca */
+    
+} */
+
+/* Ajuste no formulário */
+.login-box form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Ajuste nos campos de entrada */
+.login-box input {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #90caf9;
+    border-radius: 5px;
+    font-size: 14px;
+    background: hsl(205, 87%, 94%); /* Fundo azul claro para os campos */
+}
+
+/* Ajuste no botão */
+button.btn.btn-primary {
+    width: 100%;
+    height: 45px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: #1565c0;
+    color: white;
+    transition: all 0.3s;
+    border: none;
+}
+
+button.btn.btn-primary:hover {
+    background-color: #0d47a1;
+    transform: scale(1.05);
+}
+
+/* Responsividade para telas pequenas (smartphones) */
+@media (max-width: 480px) {
+    .login-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .login-logo img {
+        max-width: 150px;  /* Logo um pouco menor para dispositivos menores */
+    }
+
+    /* Ajuste nos campos e botões para caber melhor na tela */
+    .login-box input {
+        height: 45px;
+        font-size: 16px;
+    }
+
+    button.btn.btn-primary {
+        height: 50px;  /* Botão maior para ser mais acessível em telas pequenas */
+    }
+}
+
+/* Responsividade para tablets e telas médias */
+@media (max-width: 768px) {
+    .login-box {
+        width: 85%;
+        padding: 25px;
+    }
+
+    .login-logo img {
+        max-width: 160px;  /* Logo ajustado para telas médias */
+    }
+
+    .login-box input {
+        font-size: 15px;
+    }
+
+    button.btn.btn-primary {
+        font-size: 18px;  /* Botão um pouco maior em telas médias */
+    }
+}
+
+/* Responsividade para telas grandes (desktops) */
+@media (min-width: 1024px) {
+    .login-box {
+        width: 400px;
+        padding: 30px;
+    }
+
+    .login-logo img {
+        max-width: 180px;  /* Logo ajustado para telas grandes */
+    }
+}
