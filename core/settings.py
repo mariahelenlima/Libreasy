@@ -143,9 +143,10 @@ JAZZMIN_SETTINGS = {
     'site_title': 'Libreasy',
     'site_header': 'Libreasy',
     'site_brand': 'Libreasy',
-    'site_logo': 'images/Libreasy_logo2.png',  # Caminho do logo dentro da pasta static
+    'site_logo': 'images/Libreasy_logo3.png',  # Caminho do logo dentro da pasta static
     #'login_logo': 'images/Libreasy_logo.jpg',  # Logo usado na tela de login
     'custom_css': 'css/custom.css',  # Adicione esta linha para carregar o CSS customizado
+    'custom_js': 'js/custom.js',
     
     
     'icons': {
