@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
    # 'products',
    'livros',
+   
 ]
 
 #GRAPPELLI_ADMIN_TITLE = 'Libreasy' #colocar Libreasy como titulo de cima
@@ -154,10 +155,13 @@ JAZZMIN_SETTINGS = {
         #'products.Brand': 'fas fa-copyright',
         #'products.Category': 'fas fa-object-group',
         #'products.Product': 'fas fa-box',
-        'livros.Editora': 'fas fa-copyright',
-        'livros.Genero': 'fas fa-object-group',
-        'livros.Livro': 'fas fa-box',
+        'livros.Editora': 'fa-brands fa-etsy',
+        #'livros.Genero': 'fa-solid fa-book-open',
+        'livros.Gênero': 'fa-solid fa-bookmark',
+        'livros.Livro': 'fa-solid fa-book-open',
+        'livros.Autor': 'fa-solid fa-book-open',
     },
+    
 
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
     'copyright': 'PycodeBR LTDA',
@@ -165,3 +169,9 @@ JAZZMIN_SETTINGS = {
     'search_model': ['livro.Livro'],
     'show_ui_builder': True,
 }
+
+# LOGIN_URL = "/admin/login/"  # Caminho para a página de login
+# LOGIN_REDIRECT_URL = "/"  # Para onde redirecionar após login bem-sucedido
+# LOGOUT_REDIRECT_URL = "/admin/login/"  # Para onde redirecionar após logout
+
+#<i class="fa-solid fa-bookmark"></i>

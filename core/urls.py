@@ -23,5 +23,12 @@ urlpatterns = [
     #comentar grappelli para poder usar outra biblioteca de interface
     
     path('', admin.site.urls),
+   # path("admin/", admin.site.urls),
+
     # path('admin/', admin.site.urls), tirar admin para não precisar colocar isso sempre que for entrar
 ]
+
+
+
+    
+

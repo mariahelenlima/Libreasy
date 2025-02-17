@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib import admin
 # Register your models here.
 #from .models import Brand, Category, Product
-from .models import Editora, Gênero, Livro
+from .models import Editora, Gênero, Livro, Autor
 
 # @admin.register(Brand)
 # class BrandAdmin(admin.ModelAdmin):
@@ -26,6 +26,14 @@ class GêneroAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_active', 'description', 'created_at', 'updated_at')
     search_fields = ('name',)
     list_filter = ('is_active',)
+    
+    
+#autor
+@admin.register(Autor)
+class AutorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_active', 'description', 'created_at', 'updated_at') #campos que vão aparecer na gride admin
+    search_fields = ('name',) #procurar, procurar por nome
+    list_filter = ('is_active',) #filtros, filtrar por ativo ou inativo
     
     #criar arquivo csv com tabela dos produtos
 # @admin.register(Product)
@@ -70,3 +78,6 @@ class LivroAdmin(admin.ModelAdmin):
 
     export_to_csv.short_description = 'Exportar para CSV'
     actions = [export_to_csv]
+    
+    
+    

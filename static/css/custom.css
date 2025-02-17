@@ -46,10 +46,10 @@ body.login-page {
 
 /* .login-logo img {
     width: 150px;  /* Tamanho fixo para garantir que fique um quadrado */
-    height: 150px;
+    /* height: 150px;
     border-radius: 50%; /* Transforma em um círculo */
-    object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
-    display: block;
+    /* object-fit: cover; Garante que a imagem preencha o círculo sem distorcer */
+    /* display: block;
     margin: 0 auto 15px;
     overflow: hidden;
     border: 3px solid white; /* Opcional: borda branca */

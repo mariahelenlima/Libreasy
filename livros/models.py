@@ -1,7 +1,24 @@
 from django.db import models
 
-# Modelo Brand (descomentado)
-class Brand(models.Model):
+# # Modelo Brand (descomentado)
+# class Brand(models.Model):
+#     name = models.CharField(max_length=100, verbose_name='Nome')
+#     is_active = models.BooleanField(default=True, verbose_name='Ativo')
+#     description = models.TextField(null=True, blank=True, verbose_name='Descrição')
+#     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
+#     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+
+#     class Meta:
+#         ordering = ['name']
+#         verbose_name = 'Marca'
+
+#     def __str__(self):
+#         return self.name
+
+
+
+#Modelo Autor
+class Autor(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
     description = models.TextField(null=True, blank=True, verbose_name='Descrição')
@@ -10,7 +27,7 @@ class Brand(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Marca'
+        verbose_name = 'Autor'
 
     def __str__(self):
         return self.name
@@ -55,6 +72,10 @@ class Livro(models.Model):
         related_name='livros', verbose_name='Editora')
     gênero = models.ForeignKey(Gênero, on_delete=models.PROTECT,
         related_name='livros', verbose_name='Gênero')
+    
+    autor = models.ForeignKey(Autor, on_delete=models.PROTECT,
+    related_name='livros', verbose_name='Autor')
+    
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Preço')
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
     description = models.TextField(null=True, blank=True, verbose_name='Descrição')
@@ -67,3 +88,4 @@ class Livro(models.Model):
 
     def __str__(self):
         return self.title
+
