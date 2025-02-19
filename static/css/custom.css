@@ -138,8 +138,11 @@ button.btn.btn-primary:hover {
 input[type='password'], input[type='text'] {
     padding-right: 35px; /* Espaço para o ícone */
     width: 100%; /* Garante que o input ocupe toda a largura */
+
+
 }
 
 span {
     user-select: none; /* Evita que o ícone seja selecionado */
+    
 }
