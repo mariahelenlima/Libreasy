@@ -1,0 +1,41 @@
+/* Estilos específicos para a página de Contato */
+.pagina-contato {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagina-contato h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.quem-somos,
+.missao-visao-valores,
+.contato-info {
+    margin-bottom: 30px;
+}
+
+.quem-somos h2,
+.missao-visao-valores h2,
+.contato-info h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+.quem-somos p,
+.missao-visao-valores p,
+.contato-info p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.contato-info p strong {
+    color: #333;
+}

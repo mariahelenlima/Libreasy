@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -27,29 +26,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    
-    #'grappelli', #biblioteca p/ mudar interface do site, saiu do padrão inicial django 
-    #comentar grappelli para poder usar outra biblioteca de interface
-    
     'jazzmin',
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-   # 'products',
-   'livros',
-   
+    'livros',
 ]
-
-#GRAPPELLI_ADMIN_TITLE = 'Libreasy' #colocar Libreasy como titulo de cima
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,10 +51,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+# Configuração de Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -91,7 +79,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -111,7 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -123,56 +109,36 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Diretório onde os arquivos estáticos serão coletados
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Caso tenha uma pasta static na raiz do seu projeto
+# Configuração de arquivos estáticos
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configurações da biblioteca jazzmin para estilizar o site
-
+# Configurações da biblioteca Jazzmin para estilizar o site
 
 JAZZMIN_SETTINGS = {
     'site_title': 'Libreasy',
     'site_header': 'Libreasy',
     'site_brand': 'Libreasy',
-    'site_logo': 'images/Libreasy_logo3.png',  # Caminho do logo dentro da pasta static
-    #'login_logo': 'images/Libreasy_logo.jpg',  # Logo usado na tela de login
-    'custom_css': 'css/custom.css',  # Adicione esta linha para carregar o CSS customizado
+    'site_logo': 'Images/Libreasy_logo.jpg',  # Caminho do logo dentro da pasta static
+    'custom_css': 'css/custom.css',
     'custom_js': 'js/custom.js',
-    
-    
     'icons': {
         'auth': 'fas fa-users-cog',
         'auth.user': 'fas fa-user',
         'auth.Group': 'fas fa-users',
-        #'products.Brand': 'fas fa-copyright',
-        #'products.Category': 'fas fa-object-group',
-        #'products.Product': 'fas fa-box',
         'livros.Editora': 'fa-brands fa-etsy',
-        #'livros.Genero': 'fa-solid fa-book-open',
         'livros.Gênero': 'fa-solid fa-bookmark',
         'livros.Livro': 'fa-solid fa-book-open',
         'livros.Autor': 'fa-solid fa-book-open',
     },
-    
-
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
     'copyright': 'PycodeBR LTDA',
-    #'search_model': ['product.Product'],
     'search_model': ['livro.Livro'],
     'show_ui_builder': True,
 }
-
-# LOGIN_URL = "/admin/login/"  # Caminho para a página de login
-# LOGIN_REDIRECT_URL = "/"  # Para onde redirecionar após login bem-sucedido
-# LOGOUT_REDIRECT_URL = "/admin/login/"  # Para onde redirecionar após logout
-
-#<i class="fa-solid fa-bookmark"></i>

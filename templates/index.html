@@ -1,0 +1,229 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Libreasy - Catálogo de Livros</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="/" class="logo">Libreasy</a>
+        </div>
+        <div class="header-right">
+            <nav>
+                <ul>
+                    <li><a href="/doacoes/" class="doacoes-btn">Doações</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="minha-conta-btn">Minha Conta</a>
+                        <ul class="dropdown-menu">
+                            </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="login-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Fazer Login</h2>
+            <form id="login-form">
+                <input type="text" id="usuario" placeholder="Usuário" required />
+                <input type="password" id="senha" placeholder="Senha" required />
+                <button type="submit">Acessar</button>
+            </form>
+            <a href="esqueci-senha.html" class="esqueci-senha">Esqueci minha senha</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="filtro-cursos">
+            <h2>Filtrar por Curso</h2>
+            <label><input type="checkbox" name="curso" value="analise-e-desenvolvimento-de-sistemas" /> Análise e Desenvolvimento de Sistemas</label>
+            <label><input type="checkbox" name="curso" value="ciencia-de-dados" /> Ciência de Dados</label>
+            <label><input type="checkbox" name="curso" value="gestao-empresarial" /> Gestão Empresarial</label>
+            <label><input type="checkbox" name="curso" value="gestao-portuaria" /> Gestão Portuária</label>
+            <label><input type="checkbox" name="curso" value="gestao-de-recursos-humanos" /> Gestão de Recursos Humanos</label>
+            <label><input type="checkbox" name="curso" value="logistica" /> Logística</label>
+            <label><input type="checkbox" name="curso" value="sistemas-para-internet" /> Sistemas para Internet</label>
+            <label><input type="checkbox" name="curso" value="processos-gerenciais" /> Processos Gerenciais</label>
+            <label><input type="checkbox" name="curso" value="logistica-ams" /> Logística AMS</label>
+        </div>
+
+        <div class="area-principal">
+            <div class="filtro-superior">
+                <input type="text" id="nome-livro" placeholder="Nome do Livro" />
+                <input type="text" id="nome-autor" placeholder="Nome do Autor" />
+                <button id="buscar">Buscar</button>
+            </div>
+
+            <div class="livros">
+                {% for livro in livros %}  <div class="livro" data-curso="{{ livro.gênero.name }}" data-nome="{{ livro.title }}" data-autor="{{ livro.autor.name }}">
+                    <div class="capa-livro">
+                        <img src="{% static 'capa-livro1.jpg' %}" alt="Capa do Livro {{ livro.title }}" />
+                    </div>
+                    <h2>{{ livro.title }}</h2>
+                    <p>Autor: {{ livro.autor.name }}</p>
+                    <p>Gênero: {{ livro.gênero.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <img src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" class="footer-logo" />
+        </div>
+        <div class="footer-right">
+            <a href="https://www.fatecrl.edu.br" target="_blank">Fatec Rubens Lara</a>
+            <a href="/contato/">Contato</a>
+        </div>
+    </footer>
+
+    <script>
+         
+      // Estado de login (simulação)
+      let usuarioLogado = false; // Altere para true para simular usuário logado
+
+      // Função para atualizar o submenu de "Minha Conta"
+      function atualizarSubmenu() {
+        const dropdownMenu = document.querySelector(".dropdown-menu");
+        dropdownMenu.innerHTML = ""; // Limpa o submenu
+
+        if (usuarioLogado) {
+          // Opções para usuário logado
+          dropdownMenu.innerHTML = `
+                    <li><a href="emprestimos.html">Meus Empréstimos</a></li>
+                    <li><a href="meus-dados.html">Meus Dados</a></li>
+                    <li><a href="#" id="sair">Sair</a></li>
+                `;
+          document.getElementById("sair").addEventListener("click", () => {
+            usuarioLogado = false;
+            atualizarSubmenu();
+          });
+        } else {
+          // Opções para usuário não logado
+          dropdownMenu.innerHTML = `
+                    <li><a href="#" id="fazer-login">Fazer Login</a></li>
+                    <li><a href="criar-conta.html">Criar Conta</a></li>
+                `;
+          document
+            .getElementById("fazer-login")
+            .addEventListener("click", (e) => {
+              e.preventDefault();
+              document.getElementById("login-popup").style.display = "flex";
+            });
+        }
+      }
+
+      // Pop-up de Login
+      const loginPopup = document.getElementById("login-popup");
+      const closePopup = document.querySelector(".close-popup");
+      const loginForm = document.getElementById("login-form");
+
+      closePopup.addEventListener("click", () => {
+        loginPopup.style.display = "none";
+      });
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const usuario = document.getElementById("usuario").value;
+        const senha = document.getElementById("senha").value;
+
+        // Simulação de login (substitua por uma lógica real)
+        if (usuario && senha) {
+          usuarioLogado = true;
+          atualizarSubmenu();
+          loginPopup.style.display = "none";
+        } else {
+          alert("Usuário ou senha inválidos.");
+        }
+      });
+
+      // Fechar pop-up ao clicar fora
+      window.addEventListener("click", (e) => {
+        if (e.target === loginPopup) {
+          loginPopup.style.display = "none";
+        }
+      });
+
+      // Submenu ao passar o mouse
+      const minhaContaBtn = document.querySelector(".minha-conta-btn");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+
+      minhaContaBtn.addEventListener("mouseenter", () => {
+        dropdownMenu.style.display = "block";
+      });
+
+      minhaContaBtn.addEventListener("mouseleave", () => {
+        dropdownMenu.style.display = "none";
+      });
+
+      dropdownMenu.addEventListener("mouseenter", () => {
+        dropdownMenu.style.display = "block";
+      });
+
+      dropdownMenu.addEventListener("mouseleave", () => {
+        dropdownMenu.style.display = "none";
+      });
+
+      // Inicializa o submenu
+      atualizarSubmenu();
+
+      // Função para filtrar os livros
+      function filtrarLivros() {
+        const nomeLivro = document
+          .getElementById("nome-livro")
+          .value.toLowerCase();
+        const nomeAutor = document
+          .getElementById("nome-autor")
+          .value.toLowerCase();
+        const cursosSelecionados = Array.from(
+          document.querySelectorAll('input[name="curso"]:checked')
+        ).map((cb) => cb.value);
+
+        const livros = document.querySelectorAll(".livro");
+
+        livros.forEach((livro) => {
+          const cursoLivro = livro.getAttribute("data-curso");
+          const nomeLivroTexto = livro.getAttribute("data-nome").toLowerCase();
+          const autorLivroTexto = livro
+            .getAttribute("data-autor")
+            .toLowerCase();
+
+          const correspondeNome = nomeLivroTexto.includes(nomeLivro);
+          const correspondeAutor = autorLivroTexto.includes(nomeAutor);
+          const correspondeCurso =
+            cursosSelecionados.length === 0 ||
+            cursosSelecionados.includes(cursoLivro);
+
+          if (correspondeNome && correspondeAutor && correspondeCurso) {
+            livro.style.display = "block";
+          } else {
+            livro.style.display = "none";
+          }
+        });
+      }
+
+      // Adiciona eventos aos filtros
+      document.querySelectorAll('input[name="curso"]').forEach((checkbox) => {
+        checkbox.addEventListener("change", filtrarLivros);
+      });
+
+      document
+        .getElementById("nome-livro")
+        .addEventListener("input", filtrarLivros);
+      document
+        .getElementById("nome-autor")
+        .addEventListener("input", filtrarLivros);
+      document
+        .getElementById("buscar")
+        .addEventListener("click", filtrarLivros);
+    </script>
+</body>
+</html>
