@@ -1,0 +1,593 @@
+@charset "UTF-8";
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/****************** Tema base *******************/
+:root {
+    --background-color: #FFFFFF;
+    --text-color: #333333;
+    --header-footer-bg: #333333;
+    --header-footer-text: #ffffff;
+    --button-bg: #333333;
+    --button-text: #ffffff;
+    --border-color: #B3B3B3;
+    --livro-bg: #f7f7f7;
+}
+
+/* Modo escuro */
+[data-theme="dark"] {
+    --background-color: #312e31;
+    --text-color: #ffffff;
+    --header-footer-bg: #000000;
+    --header-footer-text: #ffffff;
+    --button-bg: #444444;
+    --button-text: #ffffff;
+    --border-color: #666666;
+    --livro-bg: #4D4D4D;
+}
+
+/****************** Global *******************/
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.libreasy-logo {
+    height: 2em; 
+    width: auto; 
+}
+
+/* Estilos globais */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1em; /* Define o tamanho base da fonte */
+}
+
+/****************** Header global *******************/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625em 1.25em; /* 10px 20px em em */
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+}
+
+header .header-left {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.5em; /* 24px em em */
+    font-weight: bold;
+    color: var(--header-footer-text);
+    text-decoration: none;
+}
+
+header .header-right nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.25em; /* 20px em em */
+}
+
+header .header-right nav ul li {
+    position: relative;
+}
+
+header .header-right nav ul li a {
+    color: var(--header-footer-text);
+    text-decoration: none;
+    padding: 0.3125em 0.625em; /* 5px 10px em em */
+    border-radius: 0.3125em; /* 5px em em */
+    transition: background-color 0.3s;
+}
+
+header .header-right nav ul li a:hover {
+    background-color: #555;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--header-footer-bg);
+    border-radius: 0.3125em; /* 5px em em */
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2); /* 4px 8px em em */
+    z-index: 1;
+}
+
+.dropdown-menu li {
+    padding: 0.625em; /* 10px em em */
+}
+
+.dropdown-menu li a {
+    color: var(--header-footer-text);
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #555;
+}
+
+/******************* Botão de Tema *******************/
+#theme-toggle {
+    background: none;
+    border-radius: 1em;
+    border: 2px solid rgb(40, 40, 40);
+    font-size: 1.5em; /* 24px em em */
+    cursor: pointer;
+    color: var(--header-footer-text);
+}
+
+/****************** Pop-up de Login *******************/
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: var(--background-color);
+    padding: 1.25em; /* 20px em em */
+    border-radius: 0.3125em; /* 5px em em */
+    width: 18.75em; /* 300px em em */
+    text-align: center;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-color);
+}
+
+.popup-content .close-popup {
+    float: right;
+    cursor: pointer;
+    font-size: 1.25em; /* 20px em em */
+    color: var(--text-color);
+}
+
+.popup-content h2 {
+    margin-bottom: 1.25em; /* 20px em em */
+}
+
+.popup-content input {
+    width: 100%;
+    padding: 0.625em; /* 10px em em */
+    margin-bottom: 0.625em; /* 10px em em */
+    border: 1px solid var(--border-color);
+    border-radius: 0.3125em; /* 5px em em */
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.popup-content button {
+    width: 100%;
+    padding: 0.625em; /* 10px em em */
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 0.3125em; /* 5px em em */
+    cursor: pointer;
+}
+
+.popup-content .esqueci-senha {
+    font-size: 0.75em; /* 12px em em */
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    margin-top: 0.625em; /* 10px em em */
+}
+
+/****************** Main Global *******************/
+main {
+    display: flex;
+    flex: 1;
+    padding: 1.25em; /* 20px em em */
+    gap: 1.25em; /* Espaçamento entre os elementos */
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/***************** Footer Global *******************/
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625em 1.25em; /* 10px 20px em em */
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+}
+
+footer .libreasy-logo {
+    height: 1.875em; /* 30px em em */
+    width: auto;
+}
+
+footer .footer-right a {
+    color: var(--header-footer-text);
+    text-decoration: none;
+    margin-left: 0.9375em; /* 15px em em */
+}
+
+/***************** Index *******************/
+
+.main-index {
+    /* Estilos específicos para a página inicial */
+    flex-direction: row; /* Organiza os elementos em linha */
+}
+
+.filtro-cursos {
+    width: 20%;
+    padding: 0.625em; /* 10px em em */
+    background-color: var(--livro-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25em; /* 20px em em */
+}
+
+.filtro-cursos h2 {
+    margin-bottom: 0.9375em; /* 15px em em */
+    font-size: 1.125em; /* 18px em em */
+}
+
+.filtro-cursos label {
+    display: block;
+    margin-bottom: 0.625em; /* 10px em em */
+}
+
+.area-principal {
+    width: 60%;
+}
+
+.filtro-superior {
+    display: flex;
+    gap: 0.625em; /* 10px em em */
+    margin-bottom: 1.25em; /* 20px em em */
+}
+
+.filtro-superior input {
+    padding: 0.3125em; /* 5px em em */
+    flex: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 0.3125em; /* 5px em em */
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.filtro-superior button {
+    padding: 0.3125em 0.625em; /* 5px 10px em em */
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 0.3125em; /* 5px em em */
+    cursor: pointer;
+}
+
+.livros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625em; /* 10px em em */
+}
+
+.livro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625em; /* 10px em em */
+    background-color: var(--livro-bg);
+    padding: 0.9375em; /* 15px em em */
+    border: 1px solid var(--border-color);
+    border-radius: 0.3125em; /* 5px em em */
+    width: 100%; /* Ocupa 100% da largura disponível */
+    max-width: 18.75em; /* 300px em em */
+    min-width: 12.5em; /* 200px em em */
+    transition: background-color 0.3s, border-color 0.3s;
+    overflow: hidden; /* Corta o conteúdo que ultrapassar os limites */
+}
+
+.livro .topo {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9375em; /* 15px em em */
+}
+
+.livro .topo .capa-livro {
+    width: 40%; /* Capa ocupa 40% do espaço */
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    border-radius: 0.3125em; /* 5px em em */
+    flex-shrink: 0;
+}
+
+.livro .topo .capa-livro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.livro .topo .info-livro {
+    width: 60%; /* Título ocupa 60% do espaço */
+}
+
+.livro .topo .info-livro h2 {
+    margin: 0;
+    font-size: 1.2em; /* Usando "em" para tamanho de fonte */
+    color: var(--text-color);
+}
+
+.livro .topo .info-livro p {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.livro .curso {
+    width: 100%; /* Ocupa 100% da largura */
+}
+
+.livro .curso p {
+    margin: 0.5em 0 0; /* Usando "em" para margens */
+    font-size: 0.7em; /* Usando "em" para tamanho de fonte */
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/****************** Doações *******************/
+
+.main-doacoes {
+    flex-direction: column; /* Organiza os elementos em coluna */
+}
+
+.pagina-doacoes {
+    margin-bottom: 1.5em; /* Espaçamento entre as seções */
+}
+
+.form-doacoes {
+    margin-top: 1.5em; /* Espaçamento entre as seções */
+}
+
+.form-doacoes form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em; /* Espaçamento entre os elementos do formulário */
+}
+
+.form-doacoes input,
+.form-doacoes textarea,
+.form-doacoes button {
+    padding: 0.5em;
+    border: 1px solid var(--border-color);
+    border-radius: 0.3125em; /* 5px em em */
+    font-size: 1em;
+}
+
+.form-doacoes textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.form-doacoes button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-doacoes button:hover {
+    background-color: #555;
+}
+
+/* Tabela de Livros */
+.tabela-livros {
+    margin-top: 1.5em; /* Espaçamento acima da tabela */
+    width: 100%; /* Ocupa 100% da largura disponível */
+    overflow-x: auto; /* Adiciona scroll horizontal se necessário */
+    width: 100%;
+    border-collapse: collapse; /* Mantém as bordas das células unidas */
+    border: 1px solid var(--border-color); /* Borda externa da tabela */
+}
+
+
+.tabela-livros th,
+.tabela-livros td {
+    border: 1px solid var(--border-color); /* Borda para cada célula */
+    padding: 0.75em; /* Espaçamento interno das células */
+    text-align: left;
+}
+
+.tabela-livros th {
+    background-color: var(--header-footer-bg);
+    color: var(--header-footer-text);
+    font-weight: bold;
+}
+
+.tabela-livros tr:nth-child(even) {
+    background-color: var(--livro-bg); /* Linhas zebradas */
+}
+
+.tabela-livros tr:hover {
+    background-color: #f0f0f0; /* Efeito hover nas linhas */
+}
+
+/****************** Criar Conta *******************/
+.pagina-criar-conta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1.25em; /* 20px em em */
+}
+
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em; /* Espaçamento entre os elementos */
+}
+
+.form-criar-conta {
+    display: flex;
+    flex-direction: column;
+    gap: 1em; /* Espaçamento entre os campos */
+}
+
+.form-criar-conta input {
+    width: 100%;
+    padding: 0.625em; /* 10px em em */
+    border: 1px solid var(--border-color);
+    border-radius: 0.3125em; /* 5px em em */
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.form-criar-conta button {
+    width: 100%;
+    padding: 0.625em; /* 10px em em */
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 0.3125em; /* 5px em em */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-criar-conta button:hover {
+    background-color: #555;
+}
+
+.form-container p {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.form-container p a {
+    color: var(--text-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/****************** Contato *******************/
+.main-contato {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto */
+    padding: 1.25em; /* 20px em em */
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.pagina-contato {
+    width: 100%;
+    max-width: 800px; /* Define uma largura máxima para o conteúdo */
+}
+
+
+.pagina-contato h1 {
+    padding: 1.25em; 
+}
+
+
+.quem-somos, .missao-visao-valores, .contato-info {
+    margin: 1.875em; /* 30px em em */
+}
+
+.quem-somos h2, .missao-visao-valores h2, .contato-info h2 {
+    margin-bottom: 0.625em; /* 10px em em */
+}
+
+.contato-info p {
+    margin: 0.3125em 0; /* 5px em em */
+}
+
+
+/*******************************************
+ Estilos para telas menores (mobile)
+*******************************************/
+
+@media (max-width: 768px) {
+    header {
+        padding: 0.5em 1em; /* Reduz o padding no header */
+    }
+
+    header .logo {
+        font-size: 1.2em; /* Reduz o tamanho do logo */
+    }
+
+    header .header-right nav ul {
+        gap: 0.5em; /* Reduz o espaçamento entre os itens do menu */
+    }
+
+    main {
+        flex-direction: column; /* Coloca o conteúdo em coluna */
+        padding: 0.5em; /* Reduz o padding */
+        margin-left: 5%; /* Reduz as margens laterais */
+        margin-right: 5%;
+    }
+
+    .filtro-cursos {
+        width: 100%; /* Ocupa 100% da largura */
+        margin-bottom: 1em; /* Adiciona margem abaixo do filtro */
+    }
+
+    .area-principal {
+        width: 100%; /* Ocupa 100% da largura */
+    }
+
+    .filtro-superior {
+        flex-direction: column; /* Coloca os inputs em coluna */
+        gap: 0.5em; /* Reduz o espaçamento */
+    }
+
+    .filtro-superior input,
+    .filtro-superior button {
+        width: 100%; /* Ocupa 100% da largura */
+    }
+
+    .livros {
+        flex-direction: column; /* Coloca os livros em coluna */
+    }
+
+    .livro {
+        width: 100%; /* Ocupa 100% da largura */
+        max-width: none; /* Remove a largura máxima */
+    }
+
+    footer {
+        flex-direction: column; /* Coloca o footer em coluna */
+        text-align: center; /* Centraliza o conteúdo */
+        padding: 0.5em; /* Reduz o padding */
+    }
+
+    footer .footer-right {
+        margin-top: 0.5em; /* Adiciona margem acima dos links */
+    }
+}

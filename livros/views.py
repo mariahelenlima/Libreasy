@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import Livro  # Importe o modelo Livro
 
+
 def index(request):
     livros = Livro.objects.all()  # Busca todos os livros do banco de dados
     return render(request, 'index.html', {'livros': livros})  # Envia os livros para o template

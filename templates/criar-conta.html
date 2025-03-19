@@ -2,55 +2,100 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libreasy - Criar Conta</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Libreasy - Criar conta</title>
+   
+    <!-- Framework Tailwind -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("{% static 'sw.js' %}")
+                .then((registration) => {
+                    console.log('Service Worker registrado com sucesso:', registration);
+                })
+                .catch((error) => {
+                    console.log('Falha ao registrar o Service Worker:', error);
+                });
+        }
+    </script>
 </head>
+
 <body>
     <header>
-        <div class="header-left">
-            <a href="/" class="logo">Libreasy</a>
+        <div class="header-left flex gap-x-3">
+            <img class="h-8 hover:animate-bounce" src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" />
+            <a href="{% url 'home' %}" class="logo"> Libreasy</a>
         </div>
         <div class="header-right">
             <nav>
                 <ul>
-                    <li><a href="/doacoes/" class="doacoes-btn">Doações</a></li>
+                    <li><a href="{% url 'doacoes' %}" class="doacoes-btn">Doações</a></li>
                     <li class="dropdown">
                         <a href="#" class="minha-conta-btn">Minha Conta</a>
                         <ul class="dropdown-menu">
-                            </ul>
+                            <li><a href="#" id="fazer-login">Fazer Login</a></li>
+                            <li><a href="{% url 'criar_conta' %}">Criar Conta</a></li>
+                            <li><a href="#" id="sair">Sair</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button id="theme-toggle">🌙</button> <!-- Botão de Tema -->
                     </li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Pop-up de Login -->
+    <div id="login-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Fazer Login</h2>
+            <form id="login-form">
+                <input type="text" id="usuario" placeholder="Usuário" required />
+                <input type="password" id="senha" placeholder="Senha" required />
+                <button type="submit">Acessar</button>
+            </form>
+            <a href="esqueci-senha.html" class="esqueci-senha">Esqueci minha senha</a>
+        </div>
+    </div>
+    
     <main>
         <div class="pagina-criar-conta">
-            <h1>Criar Conta</h1>
-            <form class="form-criar-conta">
-                <input type="text" id="nome-completo" placeholder="Nome Completo" required>
-                <input type="email" id="email" placeholder="E-mail" required>
-                <input type="password" id="senha" placeholder="Senha" required>
-                <input type="password" id="confirmar-senha" placeholder="Confirmar Senha" required>
-                <button type="submit">Criar Conta</button>
-            </form>
-            <p>Já tem uma conta? <a href="#" id="fazer-login">Faça Login</a></p>
+            <div class="form-container">
+                <h1>Criar Conta</h1>
+                <form class="form-criar-conta" method="post">
+                    {% csrf_token %}
+                    <input type="text" id="nome-completo" placeholder="Nome Completo" required>
+                    <input type="email" id="email" placeholder="E-mail" required>
+                    <input type="password" id="senha" placeholder="Senha" required>
+                    <input type="password" id="confirmar-senha" placeholder="Confirmar Senha" required>
+                    <button type="submit">Criar Conta</button>
+                </form>
+                <p>Já tem uma conta? <a href="#" id="fazer-login">Faça Login</a></p>
+            </div>
         </div>
     </main>
 
     <footer>
         <div class="footer-left">
-            <img src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" class="footer-logo" />
+            <img class="h-8 hover:animate-bounce" src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" />
         </div>
         <div class="footer-right">
-            <a href="https://www.fatecrl.edu.br" target="_blank">Fatec Rubens Lara</a>
-            <a href="/contato/">Contato</a>
+            <a href="{% url 'contato' %}">Contato</a>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
