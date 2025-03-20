@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="{% static 'css/style1.css' %}" />
      <!-- Framework Tailwind -->
      <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+       <!-- Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register("{% static 'sw.js' %}")
+              .then((registration) => {
+                  console.log('Service Worker registrado com sucesso:', registration);
+              })
+              .catch((error) => {
+                  console.log('Falha ao registrar o Service Worker:', error);
+              });
+      }
+  </script>
 </head>
 <body>
     <header>
@@ -24,6 +36,9 @@
                           <ul class="dropdown-menu">
                               </ul>
                       </li>
+                      <li>
+                        <button id="theme-toggle">🌙</button> <!-- Botão de Tema -->
+                    </li>
                   </ul>
               </nav>
           </div>
@@ -66,7 +81,8 @@
             <div class="livros">
                 {% for livro in livros %}  <div class="livro " data-curso="{{ livro.gênero.name }}" data-nome="{{ livro.title }}" data-autor="{{ livro.autor.name }}">
                     <div class="capa-livro">
-                        <img src="{% static 'capa-livro1.jpg' %}" alt="Capa do Livro {{ livro.title }}" />
+                       
+                      <img class="h-35 animate-pulse" src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Capa do Livro {{ livro.title }}" />
                     </div>
                     <h2 class="font-bold text-3xl">{{ livro.title }}</h2>
                     <p class="italic">Autor: {{ livro.autor.name }}</p>
@@ -227,5 +243,9 @@
         .getElementById("buscar")
         .addEventListener("click", filtrarLivros);
     </script>
+       <script src="{% static 'js/script.js' %}"></script>
+       <script src="{% static 'js/ScriptLogin.js' %}"></script>
+       <script src="{% static 'js/sw.js' %}"></script>
+       
 </body>
 </html>

@@ -39,16 +39,13 @@
         <div class="header-right">
             <nav>
                 <ul>
-                    <li><a href="{% url 'doacoes' %}" class="doacoes-btn">Doações</a></li>
+                    <li><a href="/doacoes/" class="doacoes-btn">Doações</a></li>
                     <li class="dropdown">
                         <a href="#" class="minha-conta-btn">Minha Conta</a>
                         <ul class="dropdown-menu">
-                            {% if user.is_authenticated %}
-                                <li><a href="{% url 'home' %}">Sair</a></li>
-                            {% else %}
-                                <li><a href="{% url 'login' %}">Fazer Login</a></li>
-                                <li><a href="{% url 'criar_conta' %}">Criar Conta</a></li>
-                            {% endif %}
+                            <li><a href="#" id="fazer-login">Fazer Login</a></li>
+                            <li><a href="criar-conta.html">Criar Conta</a></li>
+                            <li><a href="#" id="sair">Sair</a></li>
                         </ul>
                     </li>
                     <li>
@@ -58,6 +55,21 @@
             </nav>
         </div>
     </header>
+
+    <!-- Pop-up de Login -->
+    <div id="login-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Fazer Login</h2>
+            <form id="login-form">
+                {% csrf_token %} <!-- Token CSRF adicionado aqui -->
+                <input type="text" id="usuario" placeholder="Usuário" required />
+                <input type="password" id="senha" placeholder="Senha" required />
+                <button type="submit">Acessar</button>
+            </form>
+            <a href="esqueci-senha.html" class="esqueci-senha">Esqueci minha senha</a>
+        </div>
+    </div>
 
     <main class="main-doacoes">
     <div class="">
@@ -115,6 +127,7 @@
     </footer>
 
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/ScriptLogin.js' %}"></script>
 </body>
 
 </html>

@@ -1,17 +1,39 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libreasy - Contato</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+         <!-- Framework Tailwind -->
+         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+
+    <!-- Manifest -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- Service Worker -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('Service Worker registrado com sucesso:', registration);
+      })
+      .catch((error) => {
+        console.log('Falha ao registrar o Service Worker:', error);
+      });
+  }
+</script>
 </head>
+
 <body>
     <header>
-        <div class="header-left">
-            <a href="/" class="logo">Libreasy</a>
+      
+        <div class="header-left flex gap-x-3">
+            <img class="h-8 hover:animate-bounce" src="{% static 'images/Libreasy_logo2.png' %}" alt="Logo Libreasy" class="libreasy-logo">
+            <a href="{% url 'home' %}" class="logo"> Libreasy</a>
         </div>
         <div class="header-right">
             <nav>
@@ -20,36 +42,69 @@
                     <li class="dropdown">
                         <a href="#" class="minha-conta-btn">Minha Conta</a>
                         <ul class="dropdown-menu">
-                            </ul>
+                            <li><a href="#" id="fazer-login">Fazer Login</a></li>
+                            <li><a href="criar-conta.html">Criar Conta</a></li>
+                            <li><a href="#" id="sair">Sair</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button id="theme-toggle">🌙</button> <!-- Botão de Tema -->
                     </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <div class="pagina-contato">
-            <h1>Contato</h1>
-            <p>Entre em contato conosco para dúvidas, sugestões ou parcerias.</p>
-            <form class="form-contato">
-                <input type="text" id="nome" placeholder="Seu Nome" required />
-                <input type="email" id="email" placeholder="Seu E-mail" required />
-                <textarea id="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
-                <button type="submit">Enviar Mensagem</button>
+    <!-- Pop-up de Login -->
+    <div id="login-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Fazer Login</h2>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="E-mail" required>
+                <input type="password" id="senha" placeholder="Senha" required>
+                <button type="submit">Acessar</button>
             </form>
+            <a href="esqueci-senha.html" class="esqueci-senha">Esqueci minha senha</a>
+        </div>
+    </div>
+<!----------------------------------------------------------------------------------->
+    <main class="main-contato">
+        <div class="pagina-contato">
+            <h1 class="font-bold text-4xl">Libreasy - Informações </h1>
+            <hr>
+            <div class="quem-somos">
+                <h2 class="font-bold text-3xl">Quem Somos</h2>
+                <p>Somos uma equipe de desenvolvedores preocupados com o incentivo à leitura.</p>
+            </div>
+            <hr>
+            <div class="missao-visao-valores">
+                <h2 class="font-bold text-3xl">Missão</h2>
+                <p>Promover a leitura e o aprendizado contínuo.</p>
+                <h2 class="font-bold text-3xl">Visão</h2>
+                <p>Ser referência em educação e cultura na região.</p>
+                <h2 class="font-bold text-3xl">Valores</h2>
+                <p>Transparência, Inovação e Comprometimento.</p>
+            </div>
+            <hr>
+            <div class="contato-info">
+                <h2 class="font-semibold text-xl">Contato</h2>
+                <p><strong>E-mail:</strong> contato@libreasy.com</p>
+                <p><strong>Telefone:</strong> (13) 91234-5678</p>
+            </div>
         </div>
     </main>
-
+<!----------------------------------------------------------------------------------->
     <footer>
         <div class="footer-left">
-            <img src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" class="footer-logo" />
+            <img class="h-8 hover:animate-bounce" src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" class="footer-logo" />
         </div>
         <div class="footer-right">
-            <a href="https://www.fatecrl.edu.br" target="_blank">Fatec Rubens Lara</a>
-            <a href="/contato/">Contato</a>
+            <a href="contato.html">Contato</a>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/ScriptLogin.js' %}"></script>
 </body>
 </html>
