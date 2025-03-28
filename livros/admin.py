@@ -44,7 +44,7 @@ class AutorAdmin(admin.ModelAdmin):
 #     list_filter = ('is_active', 'brand', 'category')
 @admin.register(Livro)
 class LivroAdmin(admin.ModelAdmin):
-    list_display = ('title', 'editora', 'gênero', 'price',
+    list_display = ('title', 'editora', 'gênero', 'capa_url', 'price',
                     'is_active', 'created_at', 'updated_at')
     search_fields = ('title', 'editora__name', 'gênero__name')
     list_filter = ('is_active', 'editora', 'gênero')

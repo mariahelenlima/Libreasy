@@ -139,7 +139,7 @@ JAZZMIN_SETTINGS = {
         'livros.Autor': 'fa-solid fa-book-open',
     },
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
-    'copyright': 'PycodeBR LTDA',
+    'copyright': 'Libreasy LTDA',
     'search_model': ['livro.Livro'],
     'show_ui_builder': True,
 }

@@ -3,11 +3,17 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import Livro  # Importe o modelo Livro
+from .models import Gênero, Livro  # Importe o modelo Livro
 
 def index(request):
-    livros = Livro.objects.all()  # Busca todos os livros do banco de dados
-    return render(request, 'index.html', {'livros': livros})  # Envia os livros para o template
+    livros = Livro.objects.all().select_related('autor', 'gênero')  
+    generos = Gênero.objects.filter(is_active=True).order_by('name')  
+    
+    context = {
+        'livros': livros,
+        'generos': generos
+    }
+    return render(request, 'index.html', context)
 
 def contato(request):
     return render(request, 'contato.html')

@@ -75,6 +75,13 @@ class Livro(models.Model):
     
     autor = models.ForeignKey(Autor, on_delete=models.PROTECT,
     related_name='livros', verbose_name='Autor')
+
+    capa_url = models.URLField(
+        max_length=500,
+        blank=True,
+        null=True,
+        help_text="URL completa da imagem (ex: https://exemplo.com/imagem.jpg)"
+    )
     
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Preço')
     is_active = models.BooleanField(default=True, verbose_name='Ativo')

@@ -1,38 +1,38 @@
-// Função para filtrar os livros
+
+// ************ Funções para filtrar os livros *********************
 function filtrarLivros() {
-    const nomeLivro = document.getElementById('nome-livro')?.value.toLowerCase() || '';
-    const nomeAutor = document.getElementById('nome-autor')?.value.toLowerCase() || '';
-    const cursosSelecionados = Array.from(document.querySelectorAll('input[name="curso"]:checked')).map(cb => cb.value);
+    const generosSelecionados = Array.from(
+        document.querySelectorAll('input[name="genero"]:checked')
+    ).map(cb => cb.value);
 
-    const livros = document.querySelectorAll('.livro');
+    const termoBusca = document.getElementById('termo-busca').value.toLowerCase();
 
-    livros.forEach(livro => {
-        const cursoLivro = livro.getAttribute('data-curso');
+    document.querySelectorAll('.livro').forEach(livro => {
+        const generoLivro = livro.getAttribute('data-genero');
         const nomeLivroTexto = livro.getAttribute('data-nome').toLowerCase();
         const autorLivroTexto = livro.getAttribute('data-autor').toLowerCase();
 
-        const correspondeNome = nomeLivroTexto.includes(nomeLivro);
-        const correspondeAutor = autorLivroTexto.includes(nomeAutor);
-        const correspondeCurso = cursosSelecionados.length === 0 || cursosSelecionados.includes(cursoLivro);
+        const correspondeGenero = generosSelecionados.length === 0 || 
+                                  generosSelecionados.includes(generoLivro);
+        const correspondeBusca = nomeLivroTexto.includes(termoBusca) || autorLivroTexto.includes(termoBusca);
 
-        if (correspondeNome && correspondeAutor && correspondeCurso) {
-            livro.style.display = 'block';
-        } else {
-            livro.style.display = 'none';
-        }
+        livro.style.display = (correspondeGenero && correspondeBusca) 
+                           ? 'block' 
+                           : 'none';
     });
 }
 
-// Adiciona eventos aos filtros
-document.querySelectorAll('input[name="curso"]').forEach(checkbox => {
-    checkbox.addEventListener('change', filtrarLivros);
+//Event Listener
+document.addEventListener('DOMContentLoaded', function() {
+    // Filtro por input e botão de busca
+    const campoBusca = document.getElementById('termo-busca');
+    const botaoBuscar = document.getElementById('buscar');
+
+    campoBusca.addEventListener('input', filtrarLivros);
+    botaoBuscar.addEventListener('click', filtrarLivros);
 });
 
-document.getElementById('nome-livro')?.addEventListener('input', filtrarLivros);
-document.getElementById('nome-autor')?.addEventListener('input', filtrarLivros);
-document.getElementById('buscar')?.addEventListener('click', filtrarLivros);
-
-// Submenu ao passar o mouse
+// ********* Submenu ao passar o mouse ***********
 const minhaContaBtn = document.querySelector('.minha-conta-btn');
 const dropdownMenu = document.querySelector('.dropdown-menu');
 
