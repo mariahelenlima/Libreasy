@@ -1,4 +1,3 @@
-
 // ************ Funções para filtrar os livros *********************
 function filtrarLivros() {
     const generosSelecionados = Array.from(
@@ -83,6 +82,9 @@ window.onload = function () {
         }
     }
 }
+
+// ************ Pop-up de Login ********************
+// (Mantém código relacionado ao pop-up inalterado)
 
 // ************ Pop-up de Login ********************
 const loginPopup = document.getElementById('login-popup');
