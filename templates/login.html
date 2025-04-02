@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Libreasy - Login{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block content %}
+
+<main class="main-login">
+    <div class="pagina-login">
+        <h1>Fazer login</h1>
+        <hr>
+        <p>Acesse sua conta para verificar seus empréstimos e atualizar seus dados!</p>
+        
+        <form class="form-login" method="POST" action="">
+            {% csrf_token %}
+
+            <p>Usuario</p>      
+            <input type="username" name="username" placeholder="username" required>
+            <p>Senha</p>
+            <input type="password" name="password" placeholder="********" required>
+
+            <div class="botoes-login">
+                <button type="submit" class="botao-login">Acessar</button>
+                <a href="#" class="botao-senha">Esqueci a senha</a>
+            </div>
+
+        </form>
+        {{form.errors}} <!-- TESTE DE ERROS, REMOVER!!!! -->
+
+        {% for messages in messages %}
+        <p id="messages">{{message}}</p>
+        {% endfor %}
+
+        <p class="link-cadastro">Não possui conta? <a href="{% url 'criar_conta' %}">Cadastre-se</a></p>
+    </div>
+</main>
+
+{% endblock %}

@@ -32,15 +32,50 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ********* Submenu ao passar o mouse ***********
-const minhaContaBtn = document.querySelector('.minha-conta-btn');
-const dropdownMenu = document.querySelector('.dropdown-menu');
 
-if (minhaContaBtn && dropdownMenu) {
-    minhaContaBtn.addEventListener('mouseenter', () => {
+// Estado de login (simulação - real = logado / false = deslogado)
+let usuarioLogado = true;
+
+// Elementos do DOM
+const perfilBtn = document.querySelector('.perfil-btn');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+const loginUrl = dropdownMenu.getAttribute('data-url-login');
+const criarContaUrl = dropdownMenu.getAttribute('data-url-criar-conta');
+const minhaContaUrl = dropdownMenu.getAttribute('data-url-minha-conta');
+
+
+// Função para atualizar o submenu
+function atualizarSubmenu() {
+    if (!dropdownMenu) return;
+
+    dropdownMenu.innerHTML = usuarioLogado
+        ? `
+            <li><a href="${minhaContaUrl}">Minha Conta</a></li>
+            <li><a href="#" id="sair">Sair</a></li>
+          `
+        : `
+            <li><a href="${loginUrl}">Fazer Login</a></li>
+            <li><a href="${criarContaUrl}">Criar Conta</a></li>
+          `;
+
+    // Adiciona evento de logout se existir
+    const sairBtn = document.getElementById('sair');
+    if (sairBtn) {
+        sairBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            usuarioLogado = false;
+            atualizarSubmenu();
+        });
+    }
+}
+
+// Eventos de hover (se os elementos existirem)
+if (perfilBtn && dropdownMenu) {
+    perfilBtn.addEventListener('mouseenter', () => {
         dropdownMenu.style.display = 'block';
     });
 
-    minhaContaBtn.addEventListener('mouseleave', () => {
+    perfilBtn.addEventListener('mouseleave', () => {
         dropdownMenu.style.display = 'none';
     });
 
@@ -53,7 +88,14 @@ if (minhaContaBtn && dropdownMenu) {
     });
 }
 
-// Modo Claro/Escuro
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    dropdownMenu.style.display = 'none'; // Garante que inicia fechado
+    atualizarSubmenu();
+});
+
+
+// ****************** Modo Claro/Escuro ******************
 window.onload = function () {
     const themeToggle = document.getElementById('theme-toggle');
 
@@ -61,11 +103,11 @@ window.onload = function () {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
+            themeToggle.textContent = '☀️';
             localStorage.setItem('theme', 'light');
         } else {
             document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.textContent = '☀️';
+            themeToggle.textContent = '🌙';
             localStorage.setItem('theme', 'dark');
         }
     }
@@ -75,56 +117,14 @@ window.onload = function () {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.textContent = '☀️';
+            themeToggle.textContent = '🌙';
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
+            themeToggle.textContent = '☀️';
         }
     }
 }
 
-// ************ Pop-up de Login ********************
-// (Mantém código relacionado ao pop-up inalterado)
-
-// ************ Pop-up de Login ********************
-const loginPopup = document.getElementById('login-popup');
-const closePopup = document.querySelector('.close-popup');
-const loginForm = document.getElementById('login-form');
-const loginButtons = document.querySelectorAll('#fazer-login'); // Seleciona todos os botões de login
-
-// Abrir pop-up ao clicar em qualquer botão "Fazer Login"
-if (loginButtons) {
-    loginButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginPopup.style.display = 'flex';
-        });
-    });
-}
-
-// Fechar pop-up ao clicar no botão de fechar
-if (closePopup) {
-    closePopup.addEventListener('click', () => {
-        loginPopup.style.display = 'none';
-        loginForm.reset(); // Reseta o formulário
-    });
-}
-
-// Fechar pop-up ao clicar fora dele
-window.addEventListener('click', (e) => {
-    if (e.target === loginPopup) {
-        loginPopup.style.display = 'none';
-        loginForm.reset(); // Reseta o formulário
-    }
-});
-
-// Fechar pop-up ao pressionar a tecla "Esc"
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && loginPopup.style.display === 'flex') {
-        loginPopup.style.display = 'none';
-        loginForm.reset(); // Reseta o formulário
-    }
-});
 
 // Validação do formulário de login
 if (loginForm) {
