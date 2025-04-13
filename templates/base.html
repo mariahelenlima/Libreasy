@@ -21,6 +21,18 @@
               });
       }
     </script>
+
+<script>
+    // Variável global com o estado de autenticação e URLs
+    window.djangoAuth = {
+        isAuthenticated: {% if user.is_authenticated %}true{% else %}false{% endif %},
+        logoutUrl: "{% url 'logout' %}",          // Sua URL de logout
+        loginUrl: "{% url 'login' %}",            // Sua URL de login
+        signupUrl: "{% url 'criar_conta' %}",     // Sua URL de cadastro
+        minhaContaUrl: "{% url 'minha_conta' %}"  // Sua URL de minha conta
+    };
+    </script>
+
     {% block extra_head %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">

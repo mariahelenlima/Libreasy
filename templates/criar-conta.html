@@ -7,24 +7,33 @@
 
 {% block content %}
 
-
-
     <main>
         <div class="pagina-criar-conta">
             <div class="form-container">
                 <h1>Criar Conta</h1>
-                <form class="form-criar-conta" method="post">
-                    {% csrf_token %}
-                    <input type="text" id="nome-completo" placeholder="Nome Completo" required>
-                    <input type="email" id="email" placeholder="E-mail" required>
-                    <input type="password" id="senha" placeholder="Senha" required>
-                    <input type="password" id="confirmar-senha" placeholder="Confirmar Senha" required>
-                    <button type="submit">Criar Conta</button>
+                <hr>
+
+                <form class="form-criar-conta" method="post" action="">
+                    {% csrf_token %} <!-- token de segurança do Django -->
+  <!--              
+                    <input type="text" id="{{ form.name }}" placeholder="Nome Completo" required>
+                    <input type="email" id="{{ form.email }}" placeholder="E-mail" required>
+                    <input type="password" id="{{ form.password }}" placeholder="Senha" required>
+                    <input type="password" id="{{ form.password }}" placeholder="Confirmar Senha" required>
+-->                    
+                
+                    {% for field in form %}
+                    {{field.label}}
+                    {{field}}
+                    {% endfor %}
+
+                    <button type="form-submit">Criar Conta</button>
                 </form>
-                <p>Já tem uma conta? <a href="#" id="fazer-login">Faça Login</a></p>
+                {{form.errors}} <!-- TESTE DE ERROS, REMOVER!!!! -->
+                <p>Já tem uma conta? <a href="{% url 'login' %}" id="fazer-login">Faça Login</a></p>
+
             </div>
         </div>
     </main>
 
 {% endblock %}
-

@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import Gênero, Livro  # Importe o modelo Livro
+from .models import Gênero, Livro
 from django.contrib.auth.decorators import login_required
-# formulario de login importado de livros/forms.py
 from .forms import CreateUserForm
+from django.contrib.auth.forms import AuthenticationForm
 
 def index(request):
     livros = Livro.objects.all().select_related('autor', 'gênero')  
@@ -39,33 +40,24 @@ def criar_conta(request):
 def doacoes(request):
     return render(request, 'doacoes.html')
 
-# Nova view de login
 def login(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
-        password = request.POST.get("password")
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(user)
-            return redirect('minha-conta')
-        else:
-            messages.info(request, 'Usuario ou senha incorretos')
-            return JsonResponse({'success': True})
-        #else:
-            #return JsonResponse({'success': False, 'error': 'Usuário ou senha inválidos.'})
-            #return JsonResponse({'success': False, 'error': 'Método não permitido.'})
         
-    context = {}
-    return render(request, 'login.html', context)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('minha_conta')
+        else:
+            messages.error(request, 'Usuário ou senha incorretos')
+    
+    return render(request, 'login.html')
 
-# View de logout
+@require_POST
 def logout_view(request):
     logout(request)
     return redirect('home')
-
-# Página Login
-#def login(request):
-#    return render(request, 'login.html')
 
 @login_required
 def minha_conta(request):

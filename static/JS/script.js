@@ -12,7 +12,7 @@ function filtrarLivros() {
         const autorLivroTexto = livro.getAttribute('data-autor').toLowerCase();
 
         const correspondeGenero = generosSelecionados.length === 0 || 
-                                  generosSelecionados.includes(generoLivro);
+                              generosSelecionados.includes(generoLivro);
         const correspondeBusca = nomeLivroTexto.includes(termoBusca) || autorLivroTexto.includes(termoBusca);
 
         livro.style.display = (correspondeGenero && correspondeBusca) 
@@ -21,82 +21,92 @@ function filtrarLivros() {
     });
 }
 
-//Event Listener
-document.addEventListener('DOMContentLoaded', function() {
-    // Filtro por input e botão de busca
-    const campoBusca = document.getElementById('termo-busca');
-    const botaoBuscar = document.getElementById('buscar');
+// ********* Submenu ao passar o mouse (integrado com Django) ***********
+function configurarSubmenu() {
+    const perfilBtn = document.querySelector('.perfil-btn');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
 
-    campoBusca.addEventListener('input', filtrarLivros);
-    botaoBuscar.addEventListener('click', filtrarLivros);
-});
+    // Função para pegar cookie (necessária para o CSRF token)
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
-// ********* Submenu ao passar o mouse ***********
+    // Função para atualizar o submenu
+    function atualizarSubmenu() {
+        if (!dropdownMenu) return;
 
-// Estado de login (simulação - real = logado / false = deslogado)
-let usuarioLogado = true;
+        dropdownMenu.innerHTML = window.djangoAuth.isAuthenticated
+            ? `
+                <li><a href="${window.djangoAuth.minhaContaUrl}">Minha Conta</a></li>
+                <li><a href="#" id="sair">Sair</a></li>
+              `
+            : `
+                <li><a href="${window.djangoAuth.loginUrl}">Fazer Login</a></li>
+                <li><a href="${window.djangoAuth.signupUrl}">Criar Conta</a></li>
+              `;
 
-// Elementos do DOM
-const perfilBtn = document.querySelector('.perfil-btn');
-const dropdownMenu = document.querySelector('.dropdown-menu');
-const loginUrl = dropdownMenu.getAttribute('data-url-login');
-const criarContaUrl = dropdownMenu.getAttribute('data-url-criar-conta');
-const minhaContaUrl = dropdownMenu.getAttribute('data-url-minha-conta');
+        // Adiciona evento de logout
+        const sairBtn = document.getElementById('sair');
+        if (sairBtn) {
+            sairBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Cria um formulário de logout dinâmico
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = window.djangoAuth.logoutUrl;
+                
+                // Adiciona o CSRF token
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden'; 
+                csrfInput.name = 'csrfmiddlewaretoken';
+                csrfInput.value = getCookie('csrftoken');
+                form.appendChild(csrfInput);
+                
+                document.body.appendChild(form);
+                form.submit();
+            });
+        }
+    }
 
-
-// Função para atualizar o submenu
-function atualizarSubmenu() {
-    if (!dropdownMenu) return;
-
-    dropdownMenu.innerHTML = usuarioLogado
-        ? `
-            <li><a href="${minhaContaUrl}">Minha Conta</a></li>
-            <li><a href="#" id="sair">Sair</a></li>
-          `
-        : `
-            <li><a href="${loginUrl}">Fazer Login</a></li>
-            <li><a href="${criarContaUrl}">Criar Conta</a></li>
-          `;
-
-    // Adiciona evento de logout se existir
-    const sairBtn = document.getElementById('sair');
-    if (sairBtn) {
-        sairBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            usuarioLogado = false;
-            atualizarSubmenu();
+    // Eventos de hover
+    if (perfilBtn && dropdownMenu) {
+        perfilBtn.addEventListener('mouseenter', () => {
+            dropdownMenu.style.display = 'block';
         });
+
+        perfilBtn.addEventListener('mouseleave', () => {
+            dropdownMenu.style.display = 'none';
+        });
+
+        dropdownMenu.addEventListener('mouseenter', () => {
+            dropdownMenu.style.display = 'block';
+        });
+
+        dropdownMenu.addEventListener('mouseleave', () => {
+            dropdownMenu.style.display = 'none';
+        });
+    }
+
+    // Inicializa o submenu
+    if (dropdownMenu) {
+        dropdownMenu.style.display = 'none';
+        atualizarSubmenu();
     }
 }
 
-// Eventos de hover (se os elementos existirem)
-if (perfilBtn && dropdownMenu) {
-    perfilBtn.addEventListener('mouseenter', () => {
-        dropdownMenu.style.display = 'block';
-    });
-
-    perfilBtn.addEventListener('mouseleave', () => {
-        dropdownMenu.style.display = 'none';
-    });
-
-    dropdownMenu.addEventListener('mouseenter', () => {
-        dropdownMenu.style.display = 'block';
-    });
-
-    dropdownMenu.addEventListener('mouseleave', () => {
-        dropdownMenu.style.display = 'none';
-    });
-}
-
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    dropdownMenu.style.display = 'none'; // Garante que inicia fechado
-    atualizarSubmenu();
-});
-
-
 // ****************** Modo Claro/Escuro ******************
-window.onload = function () {
+function configurarTema() {
     const themeToggle = document.getElementById('theme-toggle');
 
     function toggleTheme() {
@@ -125,10 +135,25 @@ window.onload = function () {
     }
 }
 
+// ************** Inicialização quando o DOM carrega **************
+document.addEventListener('DOMContentLoaded', function() {
+    // Filtro por input e botão de busca
+    const campoBusca = document.getElementById('termo-busca');
+    const botaoBuscar = document.getElementById('buscar');
 
-// Validação do formulário de login
-if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    if (campoBusca) campoBusca.addEventListener('input', filtrarLivros);
+    if (botaoBuscar) botaoBuscar.addEventListener('click', filtrarLivros);
+
+    // Configura o submenu
+    configurarSubmenu();
+
+    // Configura o tema
+    configurarTema();
+});
+
+// ************** Validação do formulário de login **************
+if (document.getElementById('login-form')) {
+    document.getElementById('login-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const email = document.getElementById('email')?.value;
         const senha = document.getElementById('senha')?.value;
@@ -139,20 +164,12 @@ if (loginForm) {
         }
 
         // Validação básica de e-mail
-        if (!validateEmail(email)) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             alert('Por favor, insira um e-mail válido.');
             return;
         }
 
-        // Simulação de login bem-sucedido
-        alert('Login realizado com sucesso!');
-        loginPopup.style.display = 'none';
-        loginForm.reset(); // Reseta o formulário
+        // Se passou na validação, envia o formulário
+        this.submit();
     });
-}
-
-// Função para validar e-mail
-function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
 }
