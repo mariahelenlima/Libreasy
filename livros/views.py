@@ -7,6 +7,8 @@ from .models import Gênero, Livro
 from django.contrib.auth.decorators import login_required
 from .forms import CreateUserForm
 from django.contrib.auth.forms import AuthenticationForm
+from emprestimos.models import Emprestimo
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     livros = Livro.objects.all().select_related('autor', 'gênero')  
@@ -61,4 +63,13 @@ def logout_view(request):
 
 @login_required
 def minha_conta(request):
-    return render(request, 'minha-conta.html')
+    emprestimos = Emprestimo.objects.filter(usuario=request.user).order_by('-data_emprestimo')
+    
+    # Atualiza status dos empréstimos
+    for emprestimo in emprestimos:
+        emprestimo.atualizar_status()
+    
+    context = {
+        'emprestimos': emprestimos,
+    }
+    return render(request, 'minha-conta.html', context)
