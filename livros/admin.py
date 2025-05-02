@@ -2,6 +2,8 @@ import csv
 from django.http import HttpResponse
 from django.contrib import admin
 from .models import Editora, Gênero, Livro, Autor
+from django.contrib.auth.models import Group
+from django.utils.translation import gettext_lazy as _
 
 @admin.register(Editora)
 class EditoraAdmin(admin.ModelAdmin):
@@ -39,3 +41,16 @@ class LivroAdmin(admin.ModelAdmin):
     export_to_csv.short_description = 'Exportar para CSV'
     actions = [export_to_csv]  
 
+
+
+###############################################
+# Desregistrar o modelo Group do admin
+admin.site.unregister(Group)
+
+# Alterar o nome do modelo "Group" para "Permissões"
+Group._meta.verbose_name = _("Permissões")
+Group._meta.verbose_name_plural = _("Permissões")
+
+# Registrar novamente o modelo no admin
+admin.site.register(Group)
+###############################################
