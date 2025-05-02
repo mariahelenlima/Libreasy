@@ -1,8 +1,8 @@
-body{
+body {
+        background-color: #8c8a8a;
+    };
 
-    background-color: #A6CCFF;
 
-}
 
 /* Ajuste para ocupar toda a altura da tela com um fundo azul */
 body.login-page {
@@ -10,7 +10,7 @@ body.login-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #b2e2f9, #80d6ff); /* Gradiente de azul claro */
+    background: linear-gradient(to bottom, #4d4f50, #424141); /* Gradiente de azul claro */
     margin: 0;
     padding: 0;
 }
@@ -58,10 +58,10 @@ body.login-page {
     width: 100%;
     height: 40px;
     padding: 10px;
-    border: 1px solid #90caf9;
+    border: 1px solid #5b5959;
     border-radius: 5px;
     font-size: 14px;
-    background: hsl(205, 87%, 94%); /* Fundo azul claro para os campos */
+    background: hsl(200, 2%, 68%); /* Fundo azul claro para os campos */
 }
 
 /* Ajuste no botão */
@@ -71,14 +71,14 @@ button.btn.btn-primary {
     font-size: 16px;
     font-weight: bold;
     border-radius: 8px;
-    background-color: #1565c0;
-    color: white;
+    background-color: #333333;
+    color: rgb(172, 164, 164);
     transition: all 0.3s;
     border: none;
 }
 
 button.btn.btn-primary:hover {
-    background-color: #0d47a1;
+    background-color: #a39f9f;
     transform: scale(1.05);
 }
 

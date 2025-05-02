@@ -39,7 +39,7 @@
 <!-- Header compartilhado -->
 <header>
     <div class="header-left">
-        <a href="{% url 'home' %}" class="logo">Nome da Biblioteca</a>
+        <a href="{% url 'home' %}" class="logo">Libreasy</a>
     </div>
     <div class="header-right">
         <nav>
@@ -73,7 +73,7 @@
     <!-- Footer compartilhado -->
     <footer>
         <div class="footer-left">
-            <img class="h-8 hover:animate-bounce" src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" class="footer-logo"/>
+            <img class="h-8 hover:animate-bounce rounded-full" src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" class="footer-logo"/> <!--foi usando o taiwild pra deixar redondo -->
         </div>
         <div class="footer-right">
             <a href="{% url 'doacoes' %}">Doações</a>

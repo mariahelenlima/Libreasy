@@ -113,7 +113,7 @@ tr.djn-tr>.original {
 }
 
 .object-tools .historylink {
-    background-color: #3c8dbc;
+    background-color: #000000;
     width: 100%;
     display: block;
     padding: 5px;
@@ -338,7 +338,7 @@ input[type="text"]
 }
 
 .calendar td.selected a {
-    background: #3C8DBC;
+    background: #000000;
     color: #fff !important;
 }
 
@@ -363,7 +363,7 @@ input[type="text"]
 .timelist a:focus,
 .calendar td a:hover,
 .timelist a:hover {
-    background: #3C8DBC;
+    background: #222526;
     color: white;
 }
 
