@@ -48,8 +48,10 @@ class AutorAdmin(admin.ModelAdmin):
 #     list_filter = ('is_active', 'brand', 'category')
 @admin.register(Livro)
 class LivroAdmin(admin.ModelAdmin):
-    list_display = ('title', 'editora', 'gênero', 'capa_url', 'price',
-                    'is_active', 'created_at', 'updated_at')
+    # list_display = ('title', 'editora', 'gênero', 'capa_url', 'price',
+    #                 'is_active', 'created_at', 'updated_at')
+    list_display = ('title', 'editora', 'gênero', 'capa_url',
+                    'is_active', 'created_at', 'updated_at')    
     search_fields = ('title', 'editora__name', 'gênero__name')
     list_filter = ('is_active', 'editora', 'gênero')
     
@@ -72,11 +74,17 @@ class LivroAdmin(admin.ModelAdmin):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="livros.csv"'
         writer = csv.writer(response)
-        writer.writerow(['título', 'editora', 'gênero', 'preço',
+        # writer.writerow(['título', 'editora', 'gênero', 'preço',
+        #                  'ativo', 'descrição', 'criado em', 'atualizado em'])
+        writer.writerow(['título', 'editora', 'gênero',
                          'ativo', 'descrição', 'criado em', 'atualizado em'])
         for livro in queryset:
+            # writer.writerow([livro.title, livro.editora.name, livro.gênero.name,
+            #                  livro.price, livro.is_active, livro.description,
+            #                  livro.created_at, livro.updated_at])
+        for livro in queryset:
             writer.writerow([livro.title, livro.editora.name, livro.gênero.name,
-                             livro.price, livro.is_active, livro.description,
+                            livro.is_active, livro.description,
                              livro.created_at, livro.updated_at])
         return response
 

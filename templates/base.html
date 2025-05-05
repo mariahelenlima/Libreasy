@@ -48,7 +48,7 @@
     obs: conversão de urls para variaveis globais, para serem reconhecidos pelo script.js 
                 -->
                 <li class="dropdown">
-                    <a href="#" class="perfil-btn">Perfil</a>
+                    <a href="#" class="perfil-btn">Área do Leitor</a>
                         <div class="dropdown-menu"
                         data-url-login="{% url 'login' %}"
                         data-url-criar-conta="{% url 'criar_conta' %}"
@@ -76,14 +76,14 @@
             <img class="h-8 hover:animate-bounce rounded-full" src="{% static 'Images/Libreasy_logo.jpg' %}" alt="Logo Libreasy" class="footer-logo"/> <!--foi usando o taiwild pra deixar redondo -->
         </div>
         <div class="footer-right">
-            <a href="{% url 'doacoes' %}">Doações</a>
             <a href="{% url 'contato' %}">Contato</a>
+<!--        <a href="{% url 'doacoes' %}">Doações</a>              -->
+            <a href="{% url 'desenvolvedores' %}">Desenvolvedores</a>
         </div>
     </footer>
 
     <!-- Scripts compartilhados -->
     <script src="{% static 'js/script.js' %}"></script>
- <!--   <script src="{% static 'js/ScriptLogin.js' %}"></script> -->
     <script src="{% static 'js/sw.js' %}"></script>
     
     <!-- Scripts específicos por página -->
