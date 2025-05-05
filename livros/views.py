@@ -42,6 +42,9 @@ def criar_conta(request):
 def doacoes(request):
     return render(request, 'doacoes.html')
 
+def desenvolvedores(request):
+    return render(request, 'desenvolvedores.html')
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
