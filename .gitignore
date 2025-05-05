@@ -6,3 +6,7 @@ env/
 *.pyc
 __pycache__/
 db.sqlite3
+
+echo "db.sqlite3" >> .gitignore
+git add .gitignore
+git commit -m "Ignorar db.sqlite3"
