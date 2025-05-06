@@ -1,22 +1,5 @@
 from django.db import models
 
-# # Modelo Brand (descomentado)
-# class Brand(models.Model):
-#     name = models.CharField(max_length=100, verbose_name='Nome')
-#     is_active = models.BooleanField(default=True, verbose_name='Ativo')
-#     description = models.TextField(null=True, blank=True, verbose_name='Descrição')
-#     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
-#     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
-
-#     class Meta:
-#         ordering = ['name']
-#         verbose_name = 'Marca'
-
-#     def __str__(self):
-#         return self.name
-
-
-
 #Modelo Autor
 class Autor(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
@@ -31,7 +14,6 @@ class Autor(models.Model):
 
     def __str__(self):
         return self.name
-
 
 # Modelo Editora
 class Editora(models.Model):
@@ -48,7 +30,6 @@ class Editora(models.Model):
     def __str__(self):
         return self.name
 
-
 # Modelo Gênero
 class Gênero(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
@@ -63,7 +44,6 @@ class Gênero(models.Model):
 
     def __str__(self):
         return self.name
-
 
 # Modelo Livro
 class Livro(models.Model):
@@ -83,8 +63,6 @@ class Livro(models.Model):
         help_text="URL completa da imagem (ex: https://exemplo.com/imagem.jpg)"
     )
     
-    # price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Preço')
-
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
     description = models.TextField(null=True, blank=True, verbose_name='Descrição')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
