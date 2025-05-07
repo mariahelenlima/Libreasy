@@ -82,11 +82,24 @@ class Livro(models.Model):
 
     def __str__(self):
         return f"{self.title} (ISBN: {self.isbn}, Autor: {self.autor})"
+    
+    # funções para contar a quantidade de cópias
+    @property
+    def copias_disponiveis(self):
+        return self.copias.filter(status='DISPONIVEL').count()
+    
+    @property
+    def copias_emprestadas(self):
+        return self.copias.filter(status='EMPRESTADO').count()
+    
+    @property
+    def total_copias(self):
+        return self.copias.count()
 
 # Modelo Cópias
 class Copia(models.Model):
     tombamento = models.CharField(max_length=50, unique=True, verbose_name='Tombamento')
-    livro = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='Cópia', verbose_name='Livro')
+    livro = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='copias', verbose_name='Livro')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
 
