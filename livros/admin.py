@@ -66,6 +66,7 @@ class CopiasAdmin(admin.ModelAdmin):
         'livro',  # Só o campo 'livro' é necessário aqui
         'tombamento',
         'is_active',
+        'status',
     ]
     list_display = ('tombamento', 'livro', 'get_isbn', 'get_autor', 'created_at', 'is_active')
 

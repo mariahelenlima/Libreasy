@@ -90,11 +90,17 @@ class Copia(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
 
+    # tentativa de adicionar o campo de status
+    STATUS_CHOICES = [
+        ('EMPRESTADO', 'Emprestado'),
+        ('DISPONIVEL', 'Disponível'),
+    ]
+        
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='DISPONIVEL', verbose_name='Situação')
+    ### fim
     class Meta:
         ordering = ['tombamento']
         verbose_name = 'Copia'
 
     def __str__(self):
-        return self.tombamento
-
-
+        return f"{self.tombamento} (Título: {self.livro.title}, ISBN: {self.livro.isbn})"
