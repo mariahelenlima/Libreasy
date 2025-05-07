@@ -48,6 +48,14 @@ class Gênero(models.Model):
 # Modelo Livro
 class Livro(models.Model):
     title = models.CharField(max_length=100, verbose_name='Título')
+    autor = models.ForeignKey(Autor, on_delete=models.PROTECT,
+    related_name='livros', verbose_name='Autor')
+
+    isbn = models.IntegerField(unique=True, verbose_name='ISBN')
+    serie = models.CharField(max_length=50, blank=True, default='', verbose_name='Série')
+    edicao = models.IntegerField(default=1, verbose_name='Edição')
+    volume = models.IntegerField(default=1, verbose_name='Volume')
+
     editora = models.ForeignKey(Editora, on_delete=models.PROTECT,
         related_name='livros', verbose_name='Editora')
     gênero = models.ForeignKey(Gênero, on_delete=models.PROTECT,
@@ -73,5 +81,20 @@ class Livro(models.Model):
         verbose_name = 'Livro'
 
     def __str__(self):
-        return self.title
+        return f"{self.title} (ISBN: {self.isbn}, Autor: {self.autor})"
+
+# Modelo Cópias
+class Copia(models.Model):
+    tombamento = models.CharField(max_length=50, unique=True, verbose_name='Tombamento')
+    livro = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='Cópia', verbose_name='Livro')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
+    is_active = models.BooleanField(default=True, verbose_name='Ativo')
+
+    class Meta:
+        ordering = ['tombamento']
+        verbose_name = 'Copia'
+
+    def __str__(self):
+        return self.tombamento
+
 

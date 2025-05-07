@@ -12,10 +12,10 @@ class Emprestimo(models.Model):
 
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuário')
     livro = models.ForeignKey(Livro, on_delete=models.PROTECT, verbose_name='Livro')
-    copia_id = models.CharField(max_length=50, verbose_name='ID da Cópia', help_text='Identificador único da cópia física')
+    copia_id = models.CharField(max_length=50, verbose_name='Tombamento', help_text='Identificador único da cópia física')
     data_emprestimo = models.DateField(default=timezone.now, verbose_name='Data de Empréstimo')
-    data_devolucao = models.DateField(verbose_name='Data de Devolução')
-    data_devolucao_real = models.DateField(null=True, blank=True, verbose_name='Data Real de Devolução')
+    data_devolucao = models.DateField(verbose_name='Prazo de Devolução')
+    data_devolucao_real = models.DateField(null=True, blank=True, verbose_name='Data de Devolução')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='EMPRESTADO', verbose_name='Status')
 
     class Meta:

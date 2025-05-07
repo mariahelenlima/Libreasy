@@ -1,7 +1,7 @@
 import csv 
 from django.http import HttpResponse
 from django.contrib import admin
-from .models import Editora, Gênero, Livro, Autor
+from .models import Editora, Gênero, Livro, Autor, Copia
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
@@ -25,6 +25,22 @@ class AutorAdmin(admin.ModelAdmin):
     
 @admin.register(Livro)
 class LivroAdmin(admin.ModelAdmin):
+    fields = [
+        'title',
+        'autor',
+        'isbn',
+        'serie',
+        'edicao',
+        'volume',
+        'editora',
+        'gênero',
+        'capa_url',
+        'description',
+        'is_active',
+    ]
+    readonly_fields = ['created_at', 'updated_at']
+
+
     list_display = ('title', 'editora', 'gênero', 'capa_url', 'is_active', 'created_at', 'updated_at')
 
     search_fields = ('title', 'editora__name', 'gênero__name')
@@ -42,6 +58,26 @@ class LivroAdmin(admin.ModelAdmin):
 
     export_to_csv.short_description = 'Exportar para CSV'
     actions = [export_to_csv]  
+
+
+@admin.register(Copia)
+class CopiasAdmin(admin.ModelAdmin):
+    fields = [
+        'livro',  # Só o campo 'livro' é necessário aqui
+        'tombamento',
+        'is_active',
+    ]
+    list_display = ('tombamento', 'livro', 'get_isbn', 'get_autor', 'created_at', 'is_active')
+
+    search_fields = ('livro__title',)
+
+    def get_isbn(self, obj):
+        return obj.livro.isbn  # Obtém o ISBN do livro relacionado
+    get_isbn.short_description = 'ISBN'
+
+    def get_autor(self, obj):
+        return obj.livro.autor  # Obtém o autor do livro relacionado
+    get_autor.short_description = 'Autor'
 
 
 
