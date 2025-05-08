@@ -11,11 +11,13 @@ from emprestimos.models import Emprestimo
 from django.contrib.auth.decorators import login_required
 
 def index(request):
-    livros = Livro.objects.all() \
+    #livros = Livro.objects.all() \
+    livros = Livro.objects.filter(is_active=True) \
                 .select_related('autor', 'gênero') \
                  .prefetch_related('copias')
 
-    generos = Gênero.objects.filter(is_active=True).order_by('name')  
+    #generos = Gênero.objects.filter(is_active=True).order_by('name')  
+    generos = Gênero.objects.all().order_by('name')  # Remove o filter(is_active=True)
     
     context = {
         'livros': livros,

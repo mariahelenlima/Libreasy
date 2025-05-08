@@ -18,7 +18,7 @@ class Autor(models.Model):
 # Modelo Editora
 class Editora(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
-    is_active = models.BooleanField(default=True, verbose_name='Ativo')
+    #is_active = models.BooleanField(default=True, verbose_name='Ativo')
     description = models.TextField(null=True, blank=True, verbose_name='Descrição')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
@@ -33,7 +33,7 @@ class Editora(models.Model):
 # Modelo Gênero
 class Gênero(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nome')
-    is_active = models.BooleanField(default=True, verbose_name='Ativo')
+    #is_active = models.BooleanField(default=True, verbose_name='Ativo')
     description = models.TextField(null=True, blank=True, verbose_name='Descrição')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
