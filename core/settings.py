@@ -143,7 +143,8 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
     'copyright': 'Libreasy LTDA',
     'search_model': ['livro.Livro'],
-    'show_ui_builder': True,
+    # 'show_ui_builder': True,
+    "show_ui_builder": False,
 }
 
 
