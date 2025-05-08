@@ -53,8 +53,8 @@
                     <tbody>
                         {% for emprestimo in emprestimos %}
                         <tr>
-                            <td>{{ emprestimo.livro.title }}</td>
-                            <td>{{ emprestimo.livro.autor.name }}</td>
+                            <td>{{ emprestimo.copia.livro.title }}</td>
+                            <td>{{ emprestimo.copia.livro.autor.name }}</td>
                             <td>{{ emprestimo.data_emprestimo|date:"d/m/Y" }}</td>
                             <td>{{ emprestimo.data_devolucao|date:"d/m/Y" }}</td>
                             <td class="status-{{ emprestimo.status|lower }}">
