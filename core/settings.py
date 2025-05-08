@@ -143,14 +143,13 @@ JAZZMIN_SETTINGS = {
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
     'copyright': 'Libreasy LTDA',
     'search_model': ['livro.Livro'],
-    # 'show_ui_builder': True,
-    "show_ui_builder": False,
+    'show_ui_builder': True,
+    # "show_ui_builder": False,
 }
 
-
 JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": True,
-    "footer_small_text": True,
+    "navbar_small_text": False,
+    "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
     "brand_colour": "navbar-gray",
@@ -159,8 +158,8 @@ JAZZMIN_UI_TWEAKS = {
     "no_navbar_border": False,
     "navbar_fixed": False,
     "layout_boxed": False,
-    "footer_fixed": True,
-    "sidebar_fixed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
     "sidebar": "sidebar-dark-lightblue",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
@@ -168,7 +167,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_compact_style": True,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": True,
-    "theme": "cosmo",
+    "theme": "cerulean",
     "dark_mode_theme": None,
     "button_classes": {
         "primary": "btn-outline-primary",
