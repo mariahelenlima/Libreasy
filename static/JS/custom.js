@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //iconContainer.style.display = "inline-block"; // Mantém o comportamento do input
         
         iconContainer.style.display = "block";
-        iconContainer.style.width = "87%";
+        iconContainer.style.width = "86%";
 
 
         // Envolve o input no container
