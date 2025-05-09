@@ -61,8 +61,8 @@ class Livro(models.Model):
     gênero = models.ForeignKey(Gênero, on_delete=models.PROTECT,
         related_name='livros', verbose_name='Gênero')
     
-    autor = models.ForeignKey(Autor, on_delete=models.PROTECT,
-    related_name='livros', verbose_name='Autor')
+    # autor = models.ForeignKey(Autor, on_delete=models.PROTECT,
+    # related_name='livros', verbose_name='Autor')
 
     capa_url = models.URLField(
         max_length=500,
@@ -81,7 +81,8 @@ class Livro(models.Model):
         verbose_name = 'Livro'
 
     def __str__(self):
-        return f"{self.title} (ISBN: {self.isbn}, Autor: {self.autor})"
+        return f"{self.title} (ISBN: {self.isbn})"
+        #return f"{self.title} (ISBN: {self.isbn}, Autor: {self.autor})"
     
     # funções para contar a quantidade de cópias
     @property

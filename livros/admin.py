@@ -83,7 +83,7 @@ class CopiasAdmin(admin.ModelAdmin):
         # 'description',
         
     ]
-    list_display = ('tombamento', 'livro', 'get_autor', 'get_isbn', 'status', 'created_at')
+    list_display = ('tombamento', 'livro', 'get_autor', 'status', 'created_at')
     #list_display = ('tombamento', 'livro', 'get_isbn', 'get_autor', 'created_at', 'is_active')
 
     search_fields = ('livro__title',)
