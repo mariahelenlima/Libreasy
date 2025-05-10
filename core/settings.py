@@ -128,7 +128,7 @@ JAZZMIN_SETTINGS = {
     'site_title': 'Libreasy',
     'site_header': 'Libreasy',
     'site_brand': 'Libreasy',
-    'site_logo': 'Images/Libreasy_logo.jpg',  # Caminho do logo dentro da pasta static
+    'site_logo': 'Images/Libreasy_logo.png',  # Caminho do logo dentro da pasta static
     'custom_css': 'css/custom.css',
     'custom_js': 'js/custom.js',
     'icons': {

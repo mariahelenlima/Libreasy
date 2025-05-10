@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('serie', models.CharField(blank=True, default='', max_length=50, verbose_name='Série')),
                 ('edicao', models.IntegerField(default=1, verbose_name='Edição')),
                 ('volume', models.IntegerField(default=1, verbose_name='Volume')),
-                ('capa_url', models.URLField(blank=True, help_text='URL completa da imagem (ex: https://exemplo.com/imagem.jpg)', max_length=500, null=True)),
+                ('capa_url', models.URLField(blank=True, help_text='URL completa da imagem (ex: https://exemplo.com/imagem.png)', max_length=500, null=True)),
                 ('is_active', models.BooleanField(default=True, verbose_name='Ativo')),
                 ('description', models.TextField(blank=True, null=True, verbose_name='Descrição')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Criado em')),

@@ -68,7 +68,7 @@ class Livro(models.Model):
         max_length=500,
         blank=True,
         null=True,
-        help_text="URL completa da imagem (ex: https://exemplo.com/imagem.jpg)"
+        help_text="URL completa da imagem (ex: https://exemplo.com/imagem.png)"
     )
     
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
