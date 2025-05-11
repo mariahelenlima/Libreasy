@@ -158,12 +158,14 @@ admin.site.register(Group)
 # admin.site.register(User, CustomUserAdmin)
 
 
+from typing import Set
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.utils.html import format_html
 from django.urls import reverse
 
+#@admin.register(User)
 class CustomUserAdmin(BaseUserAdmin):
     def password_change_link(self, obj):
         url = reverse('admin:auth_user_password_change', args=[obj.pk])
@@ -179,5 +181,42 @@ class CustomUserAdmin(BaseUserAdmin):
 
     readonly_fields = ('password_change_link',)
 
+
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        is_superuser = request.user.is_superuser
+        disabled_fields = set()  # type: Set[str]
+
+        if not is_superuser:
+            disabled_fields |= {
+                'username',
+                'is_superuser',
+            }
+
+        for f in disabled_fields:
+            if f in form.base_fields:
+                form.base_fields[f].disabled = True
+
+        return form
+    
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+
+
+    # def get_form(self, request, obj=None, **kwargs):
+    #     form = super().get_form(request, obj, **kwargs)
+    #     is_superuser = request.user.is_superuser
+    #     disabled_fields = set()  # type: Set[str]
+
+    #     if not is_superuser:
+    #         disabled_fields |= {
+    #             'username',
+    #             'is_superuser',
+    #         }
+
+    #     for f in disabled_fields:
+    #         if f in form.base_fields:
+    #             form.base_fields[f].disabled = True
+
+    #     return form
