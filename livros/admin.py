@@ -129,41 +129,18 @@ admin.site.register(Group)
 ###############################################
 
 
-
-# from django.contrib import admin
-# from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-# from django.contrib.auth.models import User
-# from django import forms
-
-# class CustomUserChangeForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = '__all__'
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         # Remove o campo 'password' do formulário
-#         self.fields.pop('password', None)
-
-# class CustomUserAdmin(BaseUserAdmin):
-#     form = CustomUserChangeForm
-#     fieldsets = (
-#         (None, {'fields': ('username',)}),
-#         ('Informações pessoais', {'fields': ('first_name', 'last_name', 'email')}),
-#         ('Permissões', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-#         ('Datas importantes', {'fields': ('last_login', 'date_joined')}),
-#     )
-
-# admin.site.unregister(User)
-# admin.site.register(User, CustomUserAdmin)
-
-
 from typing import Set
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.utils.html import format_html
 from django.urls import reverse
+from django.contrib import admin
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
+
+USUARIOS_PROTEGIDOS = ['Libreasy', 'Desenvolvedor']
+USUARIOS_ADMINISTRADORES = ['Administrador']
 
 #@admin.register(User)
 class CustomUserAdmin(BaseUserAdmin):
@@ -182,17 +159,81 @@ class CustomUserAdmin(BaseUserAdmin):
     readonly_fields = ('password_change_link',)
 
 
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        is_superuser = request.user.is_superuser
+        #in_allowed_group = request.user.groups.filter(name='Administrador').exists()
+        is_admin_user = request.user.username in USUARIOS_ADMINISTRADORES
+
+        # Remove o campo 'is_superuser' para membros do grupo "Administrador"
+        #if not is_superuser and in_allowed_group:
+        if not is_superuser and is_admin_user:
+            updated_fieldsets = []
+            for name, data in fieldsets:
+                fields = list(data.get('fields', []))
+                if 'is_superuser' in fields:
+                    fields.remove('is_superuser')
+                updated_fieldsets.append((name, {'fields': fields}))
+            return updated_fieldsets
+
+        return fieldsets
+    
+
+    def get_readonly_fields(self, request, obj=None):
+        readonly = list(super().get_readonly_fields(request, obj))
+        #if not request.user.is_superuser and request.user.groups.filter(name='Administrador').exists():
+        if request.user.username in USUARIOS_ADMINISTRADORES:
+            readonly.append('is_superuser')
+        return readonly
+
+
+    ##
+    def has_change_permission(self, request, obj=None):
+        if obj and obj.username in USUARIOS_PROTEGIDOS:
+            return False  # Ninguém pode editar esses usuários
+        return super().has_change_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None):
+        if obj and obj.username in USUARIOS_PROTEGIDOS:
+            return False  # Ninguém pode excluir esses usuários
+        return super().has_delete_permission(request, obj)
+    ##
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         is_superuser = request.user.is_superuser
+        #in_allowed_group = request.user.groups.filter(name='Administrador').exists()
+        is_admin_user = request.user.groups.filter(name='Administrador').exists()
         disabled_fields = set()  # type: Set[str]
 
-        if not is_superuser:
+        #if not is_superuser:
+        #if not is_superuser and not in_allowed_group:
+        if not is_superuser and not  is_admin_user:
             disabled_fields |= {
-                'username',
+                #'username',
                 'is_superuser',
+                'user_permissions', #remover acesso para user mudar próprias permissoes   conceder permissões somente usando grupos
             }
+
+        # Prevent non-superusers from editing their own permissions
+        # if (
+        #     not is_superuser
+        #     and obj is not None
+        #     and obj == request.user
+        # ):
+       
+        #if not is_superuser: #and not in_allowed_group and obj is not None and obj == request.user:
+             # Impede que o próprio usuário (não superuser e não admin) altere seu nível de acesso
+        #if not is_superuser and not in_allowed_group and obj is not None and obj == request.user:
+        if not is_superuser and not is_admin_user and obj is not None and obj == request.user:  
+            disabled_fields |= {
+                'is_staff',
+                'is_superuser',
+                #'groups',
+                'user_permissions',
+            }
+#ver dps
+
 
         for f in disabled_fields:
             if f in form.base_fields:
@@ -202,21 +243,3 @@ class CustomUserAdmin(BaseUserAdmin):
     
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
-
-    # def get_form(self, request, obj=None, **kwargs):
-    #     form = super().get_form(request, obj, **kwargs)
-    #     is_superuser = request.user.is_superuser
-    #     disabled_fields = set()  # type: Set[str]
-
-    #     if not is_superuser:
-    #         disabled_fields |= {
-    #             'username',
-    #             'is_superuser',
-    #         }
-
-    #     for f in disabled_fields:
-    #         if f in form.base_fields:
-    #             form.base_fields[f].disabled = True
-
-    #     return form
