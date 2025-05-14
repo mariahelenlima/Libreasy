@@ -134,49 +134,16 @@ JAZZMIN_SETTINGS = {
         'auth': 'fas fa-users-cog',
         'auth.user': 'fas fa-user',
         'auth.Group': 'fas fa-users',
-        'livros.Editora': 'fa-brands fa-etsy',
-        'livros.Gênero': 'fa-solid fa-bookmark',
+        # 'livros.Editora': 'fa-brands fa-etsy',
+        # 'livros.Gênero': 'fa-solid fa-bookmark',
         'livros.Livro': 'fa-solid fa-book-open',
-        'livros.Autor': 'fa-solid fa-book-open',
+        # 'livros.Autor': 'fa-solid fa-book-open',
     },
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
     'copyright': 'Libreasy LTDA',
     'search_model': ['livro.Livro'],
     'show_ui_builder': True,
 }
-
-# JAZZMIN_UI_TWEAKS = {
-#     "navbar_small_text": True,
-#     "footer_small_text": True,
-#     "body_small_text": False,
-#     "brand_small_text": False,
-#     "brand_colour": "navbar-gray",
-#     "accent": "accent-primary",
-#     "navbar": "navbar-white navbar-light",
-#     "no_navbar_border": False,
-#     "navbar_fixed": False,
-#     "layout_boxed": False,
-#     "footer_fixed": True,
-#     "sidebar_fixed": False,
-#     "sidebar": "sidebar-dark-lightblue",
-#     "sidebar_nav_small_text": False,
-#     "sidebar_disable_expand": False,
-#     "sidebar_nav_child_indent": False,
-#     "sidebar_nav_compact_style": True,
-#     "sidebar_nav_legacy_style": False,
-#     "sidebar_nav_flat_style": True,
-#     "theme": "cosmo",
-#     "dark_mode_theme": None,
-#     "button_classes": {
-#         "primary": "btn-outline-primary",
-#         "secondary": "btn-outline-secondary",
-#         "info": "btn-outline-info",
-#         "warning": "btn-outline-warning",
-#         "danger": "btn-outline-danger",
-#         "success": "btn-outline-success"
-#     },
-#     "actions_sticky_top": False
-# }
 
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,

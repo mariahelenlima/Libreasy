@@ -239,15 +239,14 @@ footer .footer-right a {
 .livro {
     display: flex;
     flex-direction: row;
-    gap: 1em;
     background-color: var(--livro-bg);
-    padding: -1em;
-    border: 1px solid var(--border-color);
-    border-radius: 0.5em;
     width: calc(38.33% - 1em);
     box-sizing: border-box;
-    transition: all 0.3s ease;
     min-height: 147px;
+    gap: 1em;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5em;
+    transition: 0.3s;
 }
 
 
