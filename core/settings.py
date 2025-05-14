@@ -142,11 +142,11 @@ JAZZMIN_SETTINGS = {
         'livros.Copia': 'fa-solid fa-book',
     },
 
-    "hide_models": [
-        "livros.autor",
-        "livros.editora",
-        "livros.gênero",
-    ], #remover campos da barra do painel admin
+    # "hide_models": [
+    #     "livros.autor",
+    #     "livros.editora",
+    #     "livros.gênero",
+    # ], #remover campos da barra do painel admin
 
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
     'copyright': 'Libreasy LTDA',
