@@ -16,7 +16,7 @@ function filtrarLivros() {
         const correspondeBusca = nomeLivroTexto.includes(termoBusca) || autorLivroTexto.includes(termoBusca);
 
         livro.style.display = (correspondeGenero && correspondeBusca) 
-                           ? 'block' 
+                           ? '' 
                            : 'none';
     });
 }

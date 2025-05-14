@@ -7,16 +7,16 @@
 {% block body_class %}pagina-inicial{% endblock %}
 
 {% block content %}
-<main class="main-index mx-auto max-w-screen-lg space-y-10">
+<main class="main-index">
 
   <!-- Filtro de Gêneros (Coluna Esquerda) -->
-  <div class="filtro-generos p-4 bg-gray-800 rounded">
-    <h2 class="text-lg font-semibold mb-4">Filtrar por Gênero</h2>
+  <div class="filtro-generos">
+    <h2 class="">Filtrar por Gênero</h2>
     <form id="filtro-form">
       {% for genero in generos %}
       <label class="block">
         <input type="checkbox" name="genero" value="{{ genero.id }}" 
-               class="mr-2 rounded text-yellow-500 focus:ring focus:ring-yellow-300"
+               class=""
                onchange="filtrarLivros()"> 
         {{ genero.name }}
       </label>
@@ -34,22 +34,22 @@
     </p>
 
     <!-- Filtros Superiores -->
-<div class="filtro-superior flex space-x-4 mb-4">
+<div class="filtro-superior">
   <input type="text" id="termo-busca" placeholder="Nome do Livro ou Autor"
-         class="p-2 rounded bg-gray-800 placeholder-gray-400 border border-gray-700 focus:ring focus:ring-yellow-300">
-  <button id="buscar" class="p-2 bg-yellow-500 text-black rounded hover:bg-yellow-600">Buscar</button>
+         class="">
+  <button id="buscar" class="">Buscar</button>
 </div>
 
 
 
     <!-- Catálogo de Livros -->
-    <div class="livros grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="livros">
       {% for livro in livros %}
       <!-- Livro individual -->
-      <div class="livro p-4 rounded border-2 border-gray-700 bg-gray-900" data-genero="{{ livro.gênero.id }}" data-nome="{{ livro.title }}" data-autor="{{ livro.autor.name }}">
+      <div class="livro" data-genero="{{ livro.gênero.id }}" data-nome="{{ livro.title }}" data-autor="{{ livro.autor.name }}">
         
         <!-- Imagem/Capa -->
-        <div class="topo mb-4">
+        <div class="topo ">
           <div class="capa-livro">
             {% if livro.capa_url %}
             <img src="{{ livro.capa_url }}" alt="Capa de {{ livro.title }}" class="rounded" loading="lazy">
@@ -64,10 +64,10 @@
           <a href="#" class="text-lg font-semibold hover:underline">
             {{ livro.title }}
           </a>
-          <p class="autor text-sm italic text-gray-400">{{ livro.autor.name }}</p>
-          <p class="text-sm italic text-gray-400">Gênero: {{ livro.gênero.name }}</p>
-          <p class="text-sm text-green-400">Total de exemplares: {{ livro.total_copias }}</p>
-          <p class="text-sm text-green-400">Disponíveis: {{ livro.copias_disponiveis }}</p>
+          <p class="autor ">{{ livro.autor.name }}</p>
+          <p class="">Gênero: {{ livro.gênero.name }}</p>
+      <!--    <p class="">Total de exemplares: {{ livro.total_copias }}</p> -->
+          <p class="">Disponíveis: {{ livro.copias_disponiveis }}</p>
 
         </div>
 
