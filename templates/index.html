@@ -49,8 +49,14 @@
     <div class="livros">
       {% for livro in livros %}
       <!-- Livro individual -->
-      <div class="livro" data-genero="{{ livro.gênero.id }}" data-nome="{{ livro.title }}" data-autor="{{ livro.autor.name }}">
-        
+      <!-- <div class="livro" data-genero="{{ livro.gênero.id }}" data-nome="{{ livro.title }}" data-autor="{{ livro.autor.name }}"> -->
+    <div class="livro"
+     data-genero="{{ livro.gênero.id }}"
+     data-genero-nome="{{ livro.gênero.name|lower }}"
+     data-nome="{{ livro.title }}"
+     data-autor="{{ livro.autor.name }}">
+
+
         <!-- Imagem/Capa -->
         <figure class="capa-livro">
           

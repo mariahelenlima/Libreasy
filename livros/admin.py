@@ -209,3 +209,5 @@ class CustomUserAdmin(BaseUserAdmin):
     
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+
+#admin.site.disable_action('delete_selected') #desabilitar ações de remossão em massa

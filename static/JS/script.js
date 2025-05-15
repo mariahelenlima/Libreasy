@@ -2,24 +2,32 @@
 function filtrarLivros() {
     const generosSelecionados = Array.from(
         document.querySelectorAll('input[name="genero"]:checked')
-    ).map(cb => cb.value);
+    ).map(cb => cb.value.toLowerCase());
 
     const termoBusca = document.getElementById('termo-busca').value.toLowerCase();
 
     document.querySelectorAll('.livro').forEach(livro => {
-        const generoLivro = livro.getAttribute('data-genero');
+        const generoLivro = livro.getAttribute('data-genero').toLowerCase();
         const nomeLivroTexto = livro.getAttribute('data-nome').toLowerCase();
         const autorLivroTexto = livro.getAttribute('data-autor').toLowerCase();
 
-        const correspondeGenero = generosSelecionados.length === 0 || 
-                              generosSelecionados.includes(generoLivro);
-        const correspondeBusca = nomeLivroTexto.includes(termoBusca) || autorLivroTexto.includes(termoBusca);
+        const correspondeGeneroSelecionado = generosSelecionados.length === 0 || 
+                                             generosSelecionados.includes(generoLivro);
 
-        livro.style.display = (correspondeGenero && correspondeBusca) 
-                           ? '' 
+        const generoLivroNome = livro.getAttribute('data-genero-nome');
+
+        const correspondeBusca =
+            nomeLivroTexto.includes(termoBusca) ||
+            autorLivroTexto.includes(termoBusca) ||
+            generoLivroNome.includes(termoBusca);
+
+
+        livro.style.display = (correspondeGeneroSelecionado && correspondeBusca)
+                           ? ''
                            : 'none';
     });
 }
+
 
 // ********* Submenu ao passar o mouse (integrado com Django) ***********
 function configurarSubmenu() {
