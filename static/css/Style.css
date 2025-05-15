@@ -206,14 +206,56 @@ footer .footer-right a {
 }
 
 .area-principal {
-    width: 80%;
-}
 
+    width: 100%;
+    height: 100vh;
+    display: flex;  
+    align-items: center;
+    flex-direction: column;
+}
+.alert-box{
+    width: 60%;
+    border-radius: 10px;
+    background-color: #444444;
+    text-align: center;
+    color: #f7f7f7;
+    margin-bottom: 2rem;
+    height: 3.5vh;
+ 
+
+}
 .filtro-superior {
     display: flex;
-    gap: 0.625em; /* 10px em em */
-    margin-bottom: 1.25em; /* 20px em em */
+    width: 48%;
+    margin-bottom: 2rem;
+
 }
+.filtro-superior input{
+    margin-right: 0.6rem;
+}
+
+.livros{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+   
+   
+}
+
+
+
+.livro{
+    display: flex;  
+    width: 20rem;
+    margin: 0.6rem;
+    box-sizing: border-box;
+
+}
+
+
+
+
 
 .filtro-superior input {
     padding: 0.3125em; /* 5px em em */
@@ -235,29 +277,6 @@ footer .footer-right a {
 
 
 /* Container principal dos livros */
-.livros {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5em; /* Espaçamento entre os livros */
-    
-}
-@media (min-width: 640px) {
-    .livros {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 768px) {
-    .livros {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1024px) {
-    .livros {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 
 /* Estilo de cada livro - layout horizontal */
 .livro {
@@ -314,9 +333,6 @@ footer .footer-right a {
     white-space: normal; /* Permite quebra de linha */
     overflow: visible; /* Mostra todo o conteúdo */
     text-overflow: clip; /* Remove ellipsis */
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limita a 2 linhas */
-    -webkit-box-orient: vertical;
     min-height: 2.6em; /* Altura mínima para 2 linhas */
 }
 
@@ -343,84 +359,7 @@ footer .footer-right a {
 }
 
 
-/****************** Doações *******************/
 
-.main-doacoes {
-    flex-direction: column; /* Organiza os elementos em coluna */
-}
-
-.pagina-doacoes {
-    margin-bottom: 1.5em; /* Espaçamento entre as seções */
-}
-
-.pagina-doacoes p{
-    padding: 0.9em;
-}
-.form-doacoes {
-    margin-top: 1.5em; /* Espaçamento entre as seções */
-}
-
-.form-doacoes form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em; /* Espaçamento entre os elementos do formulário */
-}
-
-.form-doacoes input,
-.form-doacoes textarea,
-.form-doacoes button {
-    padding: 0.5em;
-    border: 1px solid var(--border-color);
-    border-radius: 0.3125em; /* 5px em em */
-    font-size: 1em;
-}
-
-.form-doacoes textarea {
-    resize: vertical; /* Permite redimensionar verticalmente */
-}
-
-.form-doacoes button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.form-doacoes button:hover {
-    background-color: #555;
-}
-
-/* Tabela de Livros */
-.tabela-livros {
-    margin-top: 1.5em; /* Espaçamento acima da tabela */
-    width: 100%; /* Ocupa 100% da largura disponível */
-    overflow-x: auto; /* Adiciona scroll horizontal se necessário */
-    width: 100%;
-    border-collapse: collapse; /* Mantém as bordas das células unidas */
-    border: 1px solid var(--border-color); /* Borda externa da tabela */
-}
-
-
-.tabela-livros th,
-.tabela-livros td {
-    border: 1px solid var(--border-color); /* Borda para cada célula */
-    padding: 0.75em; /* Espaçamento interno das células */
-    text-align: left;
-}
-
-.tabela-livros th {
-    background-color: var(--header-footer-bg);
-    color: var(--header-footer-text);
-    font-weight: bold;
-}
-
-.tabela-livros tr:nth-child(even) {
-    background-color: var(--livro-bg); /* Linhas zebradas */
-}
-
-.tabela-livros tr:hover {
-    background-color: #f0f0f0; /* Efeito hover nas linhas */
-}
 
 /****************** Criar Conta *******************/
 .pagina-criar-conta {
@@ -448,7 +387,7 @@ footer .footer-right a {
     font-size: 2.5rem; 
     text-align: center; 
     margin: 0 auto; 
-    line-height: 1.2; /
+    line-height: 1.2; 
     width: 80%; 
 }
 
@@ -624,89 +563,3 @@ footer .footer-right a {
 }
 
 
-/*********************************************
-* RESPONSIVIDADE -Estilos para telas menores *
-**********************************************/
-
-/*** TABLETS ***/
-@media (max-width: 768px) {
-    header {
-        padding: 0.5em 1em; /* Reduz o padding no header */
-    }
-
-    header .logo {
-        font-size: 1.2em; /* Reduz o tamanho do logo */
-    }
-
-    header .header-right nav ul {
-        gap: 0.5em; /* Reduz o espaçamento entre os itens do menu */
-    }
-
-    main {
-        flex-direction: column; /* Coloca o conteúdo em coluna */
-        padding: 0.5em; /* Reduz o padding */
-        margin-left: 5%; /* Reduz as margens laterais */
-        margin-right: 5%;
-    }
-
-    
-    .filtro-generos {
-        width: 100%; /* Ocupa 100% da largura */
-        margin-bottom: 1em; /* Adiciona margem abaixo do filtro */
-    }
-
-    .area-principal {
-        width: 100%; /* Ocupa 100% da largura */
-    }
-
-    .filtro-superior {
-        flex-direction: column; /* Coloca os inputs em coluna */
-        gap: 0.5em; /* Reduz o espaçamento */
-    }
-
-    .filtro-superior input,
-    .filtro-superior button {
-        width: 100%; /* Ocupa 100% da largura */
-    }
-
-    .livros {
-        flex-direction: column; /* Coloca os livros em coluna */
-    }
-
-    .livro {
-        width: 100%; /* Ocupa 100% da largura */
-        max-width: none; /* Remove a largura máxima */
-    }
-
-    footer {
-        flex-direction: column; /* Coloca o footer em coluna */
-        text-align: center; /* Centraliza o conteúdo */
-        padding: 0.5em; /* Reduz o padding */
-    }
-
-    footer .footer-right {
-        margin-top: 0.5em; /* Adiciona margem acima dos links */
-    }
-}
-/*** SMARTPHONES ***/
-@media (max-width: 480px) {
-    .livro {
-        flex-direction: column; /* Layout vertical em telas muito pequenas */
-    }
-    
-    .livro .capa-livro {
-        width: 100%;
-        height: 180px;
-    }
-}
-/* Responsividade */
-@media (max-width: 768px) {
-    .livro {
-        flex-direction: column; /* Em mobile, volta para coluna */
-    }
-    
-    .livro .capa-livro {
-        width: 100%;
-        height: 250px;
-    }
-}

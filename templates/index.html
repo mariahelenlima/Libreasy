@@ -9,7 +9,7 @@
 {% block content %}
 <main class="main-index">
 
-  <!-- Filtro de Gêneros (Coluna Esquerda) -->
+  <!-- Filtro de Gêneros (Coluna Esquerda)
   <div class="filtro-generos">
     <h2 class="">Filtrar por Gênero</h2>
     <form id="filtro-form">
@@ -23,15 +23,18 @@
       {% endfor %}
     </form>
   </div>
-
+ -->
   <!-- Área Principal -->
   <div class="area-principal">
-
-    <p>
+    <div class="alert-box">
+      <p class="alert">
       AVISO: Catalogo apenas para consulta de disponibilidade. Consulte a página
       <a href="{% url 'contato' %}" class="hover:underline hover:text-gray-400 italic">Contato</a>
       para mais Informações.
     </p>
+    </div>
+
+    
 
     <!-- Filtros Superiores -->
 <div class="filtro-superior">
@@ -49,33 +52,41 @@
       <div class="livro" data-genero="{{ livro.gênero.id }}" data-nome="{{ livro.title }}" data-autor="{{ livro.autor.name }}">
         
         <!-- Imagem/Capa -->
-        <div class="topo ">
-          <div class="capa-livro">
-            {% if livro.capa_url %}
-            <img src="{{ livro.capa_url }}" alt="Capa de {{ livro.title }}" class="rounded" loading="lazy">
-            {% else %}
-            <img src="{% static 'images/Libreasy_logo.png' %}" alt="Capa padrão" class="rounded">
-            {% endif %}
-          </div>
-        </div>
+        <figure class="capa-livro">
+          
+          {% if livro.capa_url %}
+          <img src="{{ livro.capa_url }}" alt="Capa de {{ livro.title }}" class="rounded" loading="lazy">
+          {% else %}
+          <img src="{% static 'images/Libreasy_logo.png' %}" alt="Capa padrão" class="rounded">
+          {% endif %}
+        
+        </figure>
 
         <!-- Informações do Livro -->
-        <div class="info-livro">
-          <a href="#" class="text-lg font-semibold hover:underline">
+        <div >
+          <p>
             {{ livro.title }}
-          </a>
+          </p>
           <p class="autor ">{{ livro.autor.name }}</p>
           <p class="">Gênero: {{ livro.gênero.name }}</p>
       <!--    <p class="">Total de exemplares: {{ livro.total_copias }}</p> -->
           <p class="">Disponíveis: {{ livro.copias_disponiveis }}</p>
 
         </div>
+     
 
       </div>
       {% endfor %}
     </div>
+    
+
+  
+
+
+     
 
   </div>
+ 
 </main>
 
 {% endblock %}
