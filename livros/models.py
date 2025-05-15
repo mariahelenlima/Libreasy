@@ -9,8 +9,10 @@ class Autor(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
 
     class Meta:
+        db_table = 'autor'
         ordering = ['name']
         verbose_name = 'Autor'
+        verbose_name_plural = "Autores"
 
     def __str__(self):
         return self.name

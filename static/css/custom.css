@@ -146,3 +146,30 @@ span {
     user-select: none; /* Evita que o ícone seja selecionado */
     
 }
+
+/* Esconde Autores, Editoras e Gêneros da sidebar no Django Admin com Jazzmin
+.sidebar .nav-item a[href="/admin/livros/editora/"] {
+    display: none !important;
+} */
+
+
+/* Ocultar o item Editoras */
+.sidebar .nav-item a[href="/admin/livros/editora/"] {
+    display: none !important;
+}
+
+/* Ocultar o item Autores */
+.sidebar .nav-item a[href="/admin/livros/autor/"] {
+    display: none !important;
+}
+
+/* Ocultar o item Gêneros */
+.sidebar .nav-item a[href="/admin/livros/g%C3%AAnero/"] {
+    display: none !important;
+}
+
+
+
+/* <a href="/admin/livros/g%C3%AAnero/" class="nav-link">
+                                                <i class="nav-icon fas fa-circle"></i> <p>Gêneros</p>
+                                            </a> */

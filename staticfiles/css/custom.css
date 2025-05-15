@@ -146,3 +146,10 @@ span {
     user-select: none; /* Evita que o ícone seja selecionado */
     
 }
+
+/* Esconde Autor, Editora e Gênero da barra lateral do Django Admin */
+.sidebar .model-livros-autor,
+.sidebar .model-livros-editora,
+.sidebar .model-livros-gênero {
+    display: none !important;
+}
