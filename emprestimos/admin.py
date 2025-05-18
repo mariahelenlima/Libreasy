@@ -31,19 +31,41 @@ class EmprestimoAdmin(admin.ModelAdmin):
         self.message_user(request, f"{queryset.count()} empréstimo(s) marcado(s) como devolvido(s).")
     marcar_como_devolvido.short_description = "Marcar como devolvido"
 
+    # def export_to_csv(self, request, queryset):
+    #     response = HttpResponse(content_type='text/csv')
+    #     response['Content-Disposition'] = 'attachment; filename="emprestimos.csv"'
+    #     writer = csv.writer(response)
+    #     # writer.writerow(['Usuário', 'Livro', 'Tombamento', 'Data Empréstimo', 
+    #     #                  'Data Devolução', 'Status'])
+    #     writer.writerow(['Cópia', 'Título do Livro', 'Usuário', 
+    #                      'Data Empréstimo', 'Data Devolução'])
+    #     for emprestimo in queryset:
+    #         writer.writerow([
+    #             emprestimo.usuario.username,
+    #             emprestimo.livro.title,
+    #             emprestimo.copia.tombamento,
+    #             emprestimo.data_emprestimo,
+    #             emprestimo.data_devolucao,
+    #             emprestimo.status
+    #         ])
+    #     return response
+    
     def export_to_csv(self, request, queryset):
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="emprestimos.csv"'
-        writer = csv.writer(response)
-        writer.writerow(['Usuário', 'Livro', 'Tombamento', 'Data Empréstimo', 'Data Devolução', 'Status'])
-        for emprestimo in queryset:
-            writer.writerow([
-                emprestimo.usuario.username,
-                emprestimo.livro.title,
-                emprestimo.copia.tombamento,
-                emprestimo.data_emprestimo,
-                emprestimo.data_devolucao,
-                emprestimo.status
-            ])
-        return response
+       response = HttpResponse(content_type='text/csv')
+       response['Content-Disposition'] = 'attachment; filename="emprestimos.csv"'
+       writer = csv.writer(response)
+       writer.writerow(['Leitor', 'Título do Livro', 'Tombamento', 
+                    'Data Empréstimo', 'Data Devolução', 'Status'])
+    
+       for emprestimo in queryset:
+          writer.writerow([
+              emprestimo.usuario.username,
+              emprestimo.copia.livro.title if emprestimo.copia and emprestimo.copia.livro else 'N/A',
+              emprestimo.copia.tombamento if emprestimo.copia else 'N/A',
+              emprestimo.data_emprestimo,
+              emprestimo.data_devolucao,
+              emprestimo.status
+        ])
+       return response
+
     export_to_csv.short_description = 'Exportar para CSV'
