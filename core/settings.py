@@ -149,10 +149,10 @@ JAZZMIN_SETTINGS = {
     # ], #remover campos da barra do painel admin
 
     'welcome_sign': 'Bem-vindo(a) ao Libreasy',
-    'copyright': 'Libreasy LTDA',
-    'search_model': ['livro.Livro'],
-    'show_ui_builder': True,
-    # "show_ui_builder": False,
+    'copyright': 'Libreasy Sistemas para Bibliotecas',
+    #'search_model': ['livro.Livro'],
+    #'show_ui_builder': True,
+     "show_ui_builder": False,
 }
 
 JAZZMIN_UI_TWEAKS = {

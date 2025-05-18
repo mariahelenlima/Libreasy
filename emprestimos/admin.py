@@ -9,7 +9,8 @@ from livros.models import Copia
 class EmprestimoAdmin(admin.ModelAdmin):
     list_display = ('usuario', 'get_livro', 'get_tombamento', 'data_emprestimo', 'data_devolucao', 'status')
     list_filter = ('status', 'data_emprestimo')
-    search_fields = ('usuario__username', 'livro__title', 'copia__tombamento')
+    #search_fields = ('usuario__username', 'livro__title', 'copia__tombamento')
+    search_fields = ('usuario__username', 'copia__livro__title', 'copia__tombamento')
     date_hierarchy = 'data_emprestimo'
     actions = ['marcar_como_devolvido', 'export_to_csv']
 

@@ -86,14 +86,14 @@ class CopiasAdmin(admin.ModelAdmin):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="copias.csv"'
         writer = csv.writer(response)
-        writer.writerow(['título', 'autor','editora', 'gênero', 'ativo', 'descrição', 'criado em', 'atualizado em'])
+        writer.writerow(['número de tombamento', 'título', 'autor','editora', 'gênero', 'criado em', 'atualizado em'])
 
         for copia in queryset:
-            writer.writerow([copia.livro.title, copia.livro.autor.name if copia.livro.autor else '', 
+            writer.writerow([copia.tombamento, copia.livro.title, 
+                             copia.livro.autor.name if copia.livro.autor else '', 
                              copia.livro.editora.name if copia.livro.editora.name else '', 
                              copia.livro.gênero.name if copia.livro.gênero.name else '', 
-                             copia.livro.is_active, 
-                             copia.livro.description if hasattr(copia.livro, 'description') else '', 
+                             #copia.livro.description if hasattr(copia.livro, 'description') else '', 
                              copia.livro.created_at, 
                              copia.livro.updated_at])
         return response
