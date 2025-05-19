@@ -11,30 +11,57 @@
     
     <div class="account-sections-wrapper">
         <!-- Seção de Informações do Usuário (40%) -->
-        <div class="user-info-section">
-            <h2>Meus Dados</h2>
-            <form method="post" class="user-form">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" value="{{ user.first_name }} {{ user.last_name }}" disabled>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="{{ user.email }}" disabled>
-                </div>
-                
-                <div class="form-group">
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" value="********" disabled>
-                    <a href="#" class="change-password">Alterar Senha</a>
-                </div>
-                
-                <button type="button" class="edit-btn" onclick="enableEditing()">Editar Dados</button>
-                <button type="submit" class="save-btn" style="display:none;">Salvar Alterações</button>
-            </form>
+<div class="user-info-section">
+    <h2>Meus Dados</h2>
+    
+    <!-- Formulário de dados do usuário -->
+    <form method="post" class="user-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_first_name">Nome:</label>
+            <input type="text" id="id_first_name" name="first_name" 
+                   value="{{ user.first_name }}" disabled>
         </div>
+        
+        <div class="form-group">
+            <label for="id_last_name">Sobrenome:</label>
+            <input type="text" id="id_last_name" name="last_name" 
+                   value="{{ user.last_name }}" disabled>
+        </div>
+        
+        <div class="form-group">
+            <label for="id_email">Email:</label>
+            <input type="email" id="id_email" name="email" 
+                   value="{{ user.email }}" disabled>
+        </div>
+        
+        <button type="button" class="edit-btn" onclick="enableEditing()">Editar Dados</button>
+        <button type="submit" name="save_user" class="save-btn" style="display:none;">Salvar Alterações</button>
+    </form>
+    
+    <!-- Formulário de alteração de senha -->
+    <div class="password-change-form" style="margin-top: 20px;">
+        <h3>Alterar Senha</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_old_password">Senha atual:</label>
+                <input type="password" name="old_password" id="id_old_password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="id_new_password1">Nova senha:</label>
+                <input type="password" name="new_password1" id="id_new_password1" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="id_new_password2">Confirmação da nova senha:</label>
+                <input type="password" name="new_password2" id="id_new_password2" class="form-control">
+            </div>
+            <button type="submit" name="change_password" class="save-btn">Salvar Nova Senha</button>
+        </form>
+    </div>
+    
+</div>
 
         <!-- Seção de Histórico de Empréstimos (60%) -->
         <div class="loan-history-section">
@@ -210,6 +237,11 @@
         
         document.querySelector('.edit-btn').style.display = 'none';
         document.querySelector('.save-btn').style.display = 'inline-block';
+    }
+    
+    function togglePasswordForm() {
+        const form = document.querySelector('.password-change-form');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
     }
 </script>
 {% endblock %}
