@@ -9,6 +9,7 @@
     <hr>
     <br>
     
+    
     <div class="account-sections-wrapper">
         <!-- Seção de Informações do Usuário (40%) -->
 <div class="user-info-section">
@@ -40,6 +41,16 @@
         <button type="submit" name="save_user" class="save-btn" style="display:none;">Salvar Alterações</button>
     </form>
     
+                {% if messages %}
+                <div class="messages-container">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                            <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
     <!-- Formulário de alteração de senha -->
     <div class="password-change-form" style="margin-top: 20px;">
         <h3>Alterar Senha</h3>

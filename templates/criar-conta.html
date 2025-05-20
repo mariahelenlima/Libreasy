@@ -14,13 +14,7 @@
                 <hr>
 
                 <form class="form-criar-conta" method="post" action="">
-                    {% csrf_token %} <!-- token de segurança do Django -->
-  <!--              
-                    <input type="text" id="{{ form.name }}" placeholder="Nome Completo" required>
-                    <input type="email" id="{{ form.email }}" placeholder="E-mail" required>
-                    <input type="password" id="{{ form.password }}" placeholder="Senha" required>
-                    <input type="password" id="{{ form.password }}" placeholder="Confirmar Senha" required>
--->                    
+                    {% csrf_token %} <!-- token de segurança do Django -->              
                 
                     {% for field in form %}
                     {{field.label}}
@@ -29,7 +23,18 @@
 
                     <button type="form-submit">Criar Conta</button>
                 </form>
-                {{form.errors}} <!-- TESTE DE ERROS, REMOVER!!!! -->
+
+                {% if messages %}
+                <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                    </div>
+                {% endfor %}
+                </div>
+                {% endif %}
+
                 <p>Já tem uma conta? <a href="{% url 'login' %}" id="fazer-login">Faça Login</a></p>
 
             </div>
