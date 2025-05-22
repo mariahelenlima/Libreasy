@@ -1,0 +1,34 @@
+/****************** Contato *******************/
+body {
+    height: 100vh;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    text-align: center; /* Centraliza o texto */
+    padding: 1.25em; /* 20px em em */
+    margin-left: 10%;
+    margin-right: 10%;
+   
+}
+
+.pagina-contato {
+    width: 100%;
+   
+}
+
+.quem-somos, .missao-visao-valores, .contato-info {
+    margin: 1.875em; /* 30px em em */
+}
+
+.quem-somos h2, .missao-visao-valores h2, .contato-info h2 {
+    margin-bottom: 0.625em; /* 10px em em */
+}
+
+.contato-info p {
+    margin: 0.3125em 0; /* 5px em em */
+}
+
+

@@ -37,7 +37,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 100%;
+    
 }
 
 .libreasy-logo {
@@ -64,6 +64,7 @@ header {
     padding: 0.625em 1.25em; /* 10px 20px em em */
     background-color: var(--header-footer-bg);
     color: var(--header-footer-text);
+    height: max-content;
 }
 
 header .header-left {
@@ -146,7 +147,22 @@ main {
     margin-left: 1%;
     margin-right: 1%;
     background-color: var(--background-color);
-    height: 100vh;
+}
+
+.messages-container {
+    background-color: rgb(193, 89, 51);
+    color: white;
+    text-align: center;
+}
+
+.close {
+    font: bold; 
+    color: pink;
+}
+
+.close:hover {
+    color: red;
+    cursor: pointer;
 }
 
 /***************** Footer Global *******************/
@@ -158,7 +174,7 @@ footer {
     background-color: var(--header-footer-bg);
     color: var(--header-footer-text);
     z-index: 1;
-
+    height: max-content;
 }
 
 footer .footer-left img {
@@ -174,183 +190,5 @@ footer .footer-right a {
 
 
 
-/****************** Criar Conta *******************/
-.pagina-criar-conta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 1.25em; /* 20px em em */
-}
-
-.form-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1em; /* Espaçamento entre os elementos */
-}
-
-.form-criar-conta {
-    display: flex;
-    flex-direction: column;
-    gap: 1em; /* Espaçamento entre os campos */
-}
-
-.form-criar-conta input {
-    width: 100%;
-    padding: 0.625em; /* 10px em em */
-    border: 1px solid var(--border-color);
-    border-radius: 0.3125em; /* 5px em em */
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-.form-criar-conta button {
-    width: 100%;
-    padding: 0.625em; /* 10px em em */
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border-radius: 0.3125em; /* 5px em em */
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.form-criar-conta button:hover {
-    background-color: #555;
-}
-
-.form-container p {
-    text-align: center;
-    margin-top: 1em;
-}
-
-.form-container p a {
-    color: var(--text-color);
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-/****************** Login *******************/
-
-.main-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - var(--header-height));
-    padding: 2rem;
-}
-
-.pagina-login {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Textos */
-
-
-.pagina-login > p {
-    color: var(--text-color);
-    text-align: center;
-    opacity: 0.9;
-}
-
-/* Formulário */
-.form-login {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.form-login input {
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-/* Botões */
-.botoes-login {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-}
-
-.botao-login,
-.botao-senha {
-    flex: 1;
-    padding: 0.75rem;
-    text-align: center;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-
-.botao-login {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-}
-
-.botao-senha {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: 1px solid var(--button-bg);
-    text-decoration: none;
-}
-
-/* Efeitos hover */
-.botao-login:hover,
-.botao-senha:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-/* Link de cadastro */
-.link-cadastro {
-    text-align: center;
-    color: var(--text-color);
-    margin-top: 1rem;
-}
-
-.link-cadastro a {
-    color: var(--text-color);
-    text-decoration: underline;
-}
-
-/****************** Contato *******************/
-.main-contato {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo horizontalmente */
-    justify-content: center; /* Centraliza o conteúdo verticalmente */
-    text-align: center; /* Centraliza o texto */
-    padding: 1.25em; /* 20px em em */
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-.pagina-contato {
-    width: 100%;
-    max-width: 800px; /* Define uma largura máxima para o conteúdo */
-}
-
-.quem-somos, .missao-visao-valores, .contato-info {
-    margin: 1.875em; /* 30px em em */
-}
-
-.quem-somos h2, .missao-visao-valores h2, .contato-info h2 {
-    margin-bottom: 0.625em; /* 10px em em */
-}
-
-.contato-info p {
-    margin: 0.3125em 0; /* 5px em em */
-}
 
 

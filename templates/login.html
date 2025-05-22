@@ -6,6 +6,7 @@
 {% block body_class %}login{% endblock %}
 
 {% block content %}
+<head>  <link rel="stylesheet" href="{% static 'css/login.css' %}" /> </head>
 
 <main class="main-login">
     <div class="pagina-login">
@@ -27,13 +28,21 @@
             </div>
 
         </form>
-        {{form.errors}} <!-- TESTE DE ERROS, REMOVER!!!! -->
 
-        {% for messages in messages %}
-        <p id="messages">{{message}}</p>
-        {% endfor %}
+        {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                    <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                 </div>
+            {% endfor %}
+        </div>
+        {% endif %}
 
         <p class="link-cadastro">Não possui conta? <a href="{% url 'criar_conta' %}">Cadastre-se</a></p>
+
+        
     </div>
 </main>
 

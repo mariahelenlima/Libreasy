@@ -1,15 +1,14 @@
-
-
 /***************** Index *******************/
+body {
+height: 100vh;
+}
 
-.main-index {
+main {
 
     display: column;
     gap: 1.25em;
     padding: 1.25em;
-    height: 100vh;
    
- 
 }
 
 .filtro-generos {
@@ -38,7 +37,6 @@
 .area-principal {
 
     width: 100%;
-    height: 100vh;
     display: flex;  
     align-items: center;
     flex-direction: column;
@@ -191,28 +189,23 @@
         height: 100vh;
         flex-direction: column;
         overflow-y: scroll;
-
     }
 
     .area-principal{
-    width: 100%;
-    display: flex;  
-    align-items: center;
-    flex-direction: column;
-    
-
+        width: 100%;
+        display: flex;  
+        align-items: center;
+        flex-direction: column;
     }
 
     .alert-box{
-    width: 100%;
-    border-radius: 10px;
-    text-align: center;
-    background-color: transparent;
-    color: var(--text-color);
-    height: 3.5vh;
-}
-
-
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        background-color: transparent;
+        color: var(--text-color);
+        height: 3.5vh;
+    }
 
     .filtro-superior {
         display: flex;
@@ -223,7 +216,7 @@
     }
 
     input::placeholder {
-    font-size: 0.75rem;
+        font-size: 0.75rem;
     }
 
 
@@ -236,9 +229,7 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-    
-    
+        align-items: center;  
     }
 
     .livro{
@@ -247,7 +238,6 @@
         width: 100%;
         margin: 0.6rem;
         box-sizing: border-box;
-
     }
 
     .livro .info-livro {
@@ -311,7 +301,7 @@
     .area-principal {
 
         width: 100%;
-        height: 100vh;
+        
         display: flex;  
         align-items: center;
         flex-direction: column;
@@ -377,7 +367,6 @@
     .area-principal {
 
         width: 100%;
-        height: 100vh;
         display: flex;  
         align-items: center;
         flex-direction: column;

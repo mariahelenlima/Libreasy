@@ -6,17 +6,18 @@
 {% block body_class %}desenvolvedores{% endblock %}
 
 {% block content %}
+<head>  <link rel="stylesheet" href="{% static 'css/dev.css' %}" /> </head>
 <!----------------------------------------------------------------------------------->
-    <main class="main-contato">
-        <div class="pagina-contato">
+    <main>
+        
             <h1 class="font-bold text-5xl">Libreasy </h1>
             
             <div class="quem-somos">
                 <h2 class="font-bold text-3xl">Quem Somos</h2>
                 <p>Somos uma equipe de desenvolvedores preocupados com o incentivo à leitura.</p>
             </div>
-            <hr>
-            <div class="missao-visao-valores">
+            
+            <div class="mvv">
                 <h2 class="font-bold text-3xl">Missão</h2>
                 <p>Desenvolver aplicações e sites em prol da educação.</p>
                 <h2 class="font-bold text-3xl">Visão</h2>
@@ -24,13 +25,13 @@
                 <h2 class="font-bold text-3xl">Valores</h2>
                 <p>Transparência, Inovação e Comprometimento.</p>
             </div>
-            <hr>
-            <div class="contato-info">
-                <h2 class="font-semibold text-xl">Contato</h2>
+            
+            <div class="ctt">
+                <h2 class="font-semibold text-3xl">Contato</h2>
                 <p><strong>E-mail:</strong> contato@libreasy.com</p>
                 <p><strong>Telefone:</strong> (13) 91234-5678</p>
             </div>
-        </div>
+    
     </main>
 <!----------------------------------------------------------------------------------->
 {% endblock %}
