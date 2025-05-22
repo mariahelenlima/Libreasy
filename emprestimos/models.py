@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from livros.models import Copia
 from django.utils import timezone
+from django.core.exceptions import ValidationError #def clean
 
 class Emprestimo(models.Model):
     STATUS_CHOICES = [
@@ -33,6 +34,13 @@ class Emprestimo(models.Model):
                 self.status = 'EM_ATRASO'
             else:
                 self.status = 'EMPRESTADO'
+
+    ### teste de empréstimo único por cópia
+    def clean(self):
+        # Verifica se a cópia já está emprestada
+        if self.copia.status == 'EMPRESTADO' and self.status != 'DEVOLVIDO':
+            raise ValidationError(f'Esta cópia (Tombamento: {self.copia.tombamento}) já está emprestada e não pode ser emprestada novamente.')
+    
 
     def save(self, *args, **kwargs):
         self.atualizar_status()

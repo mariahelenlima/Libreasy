@@ -69,15 +69,3 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-@login_required
-def minha_conta(request):
-    emprestimos = Emprestimo.objects.filter(usuario=request.user).order_by('-data_emprestimo')
-    
-    # Atualiza status dos empréstimos
-    for emprestimo in emprestimos:
-        emprestimo.atualizar_status()
-    
-    context = {
-        'emprestimos': emprestimos,
-    }
-    return render(request, 'minha-conta.html', context)
