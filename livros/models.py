@@ -53,7 +53,7 @@ class Livro(models.Model):
     autor = models.ForeignKey(Autor, on_delete=models.PROTECT,
     related_name='livros', verbose_name='Autor')
 
-    isbn = models.CharField(unique=True, verbose_name='ISBN')
+    isbn = models.CharField(unique=True, max_length=30, verbose_name='ISBN')
     serie = models.CharField(max_length=50, blank=True, default='', verbose_name='Série')
     edicao = models.IntegerField(default=1, verbose_name='Edição')
     volume = models.IntegerField(default=1, verbose_name='Volume')
