@@ -4,7 +4,11 @@
 {% block body_class %}minha-conta{% endblock %}
 <!-- PAGINA MINHA CONTA NÃO FUNCIONAL -->
 {% block content %}
-<head>  <link rel="stylesheet" href="{% static 'css/minha-conta.css' %}" /> </head>
+<head>
+    <link rel="stylesheet" href="{% static 'css/minha-conta.css' %}" />
+
+
+</head>
 
 <main>
 <div class="minha-conta-container">
@@ -16,7 +20,7 @@
     <div class="account-sections-wrapper">
         <!-- Seção de Informações do Usuário (40%) -->
 <div class="user-info-section">
-    <h2>Meus Dados</h2>
+    <h2 class="font-bold">Meus Dados</h2>
     
     <!-- Formulário de dados do usuário -->
     <form method="post" class="user-form">
@@ -43,8 +47,8 @@
         <button type="button" class="edit-btn" onclick="enableEditing()">Editar Dados</button>
         <button type="submit" name="save_user" class="save-btn" style="display:none;">Salvar Alterações</button>
     </form>
-    
-                {% if messages %}
+
+      <!--       {% if messages %}
                 <div class="messages-container">
                     {% for message in messages %}
                     <div class="alert alert-{{ message.tags }}">
@@ -54,22 +58,57 @@
                     {% endfor %}
                 </div>
                 {% endif %}
+ -->
+            
     <!-- Formulário de alteração de senha -->
     <div class="password-change-form" style="margin-top: 20px;">
-        <h3>Alterar Senha</h3>
+        <h3 class="font-bold">Alterar Senha</h3>
         <form method="post">
             {% csrf_token %}
+
             <div class="form-group">
                 <label for="id_old_password">Senha atual:</label>
                 <input type="password" name="old_password" id="id_old_password" class="form-control">
+                
+                    <!-- erros -->
+                    {% if password_form.old_password.errors %}
+                    <div class="messages-container">
+                        {% for error in password_form.old_password.errors %}
+                        {{ error }}
+                        <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
             </div>
+
+
             <div class="form-group">
                 <label for="id_new_password1">Nova senha:</label>
                 <input type="password" name="new_password1" id="id_new_password1" class="form-control">
+                    <!-- erros -->
+                    {% if password_form.new_password1.errors %}
+                    <div class="messages-container">
+                        {% for error in password_form.new_password1.errors %}
+                        {{ error }}
+                         <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
             </div>
+            
             <div class="form-group">
-                <label for="id_new_password2">Confirmação da nova senha:</label>
+                <label for="id_new_password2">Confirmar senha:</label>
                 <input type="password" name="new_password2" id="id_new_password2" class="form-control">
+                    <!-- erros-->
+                    {% if password_form.new_password2.errors %}
+                    <div class="messages-container">
+                        {% for error in password_form.new_password2.errors %}
+                        {{ error }}
+                         <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                    
             </div>
             <button type="submit" name="change_password" class="save-btn">Salvar Nova Senha</button>
         </form>
@@ -122,6 +161,10 @@
 </main>
 
 
+
+{% endblock %}
+
+{% block extra_scripts %}
 <script>
     function enableEditing() {
         const inputs = document.querySelectorAll('.user-form input[disabled]');
@@ -138,5 +181,7 @@
         const form = document.querySelector('.password-change-form');
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     }
+
+
 </script>
 {% endblock %}
