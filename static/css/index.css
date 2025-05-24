@@ -180,7 +180,15 @@ main {
     transform: scale(1.05);
 }
 
+.titulo {
+    font-weight: bold;
+}
 
+.copias {
+    
+    font-weight: bold;
+    
+}
 /* Medias */
 @media (max-width: 575px){
     .main-index{

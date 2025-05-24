@@ -97,6 +97,7 @@ header .header-right nav ul li a {
     padding: 0.3125em 0.625em; /* 5px 10px em em */
     border-radius: 0.3125em; /* 5px em em */
     transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 header .header-right nav ul li a:hover {
@@ -128,6 +129,16 @@ header .header-right nav ul li a:hover {
 .dropdown-menu li a:hover {
     background-color: #555;
 }
+
+
+
+@media (max-width: 320px){
+
+    .header-right nav ul li a {
+        font-size: smaller;
+    }
+}
+    
 
 /******************* Botão de Tema *******************/
 #theme-toggle {

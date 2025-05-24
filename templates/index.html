@@ -52,13 +52,13 @@
 
       <!-- Informações do Livro -->
       <div class="info-livro" >
-        <p>
+        <p class="titulo">
           {{ livro.title }}
         </p>
-        <p class="autor ">{{ livro.autor.name }}</p>
-        <p class="">Gênero: {{ livro.gênero.name }}</p>
+        <p class="autor">{{ livro.autor.name }}</p>
+        <p class="genero">Gênero: {{ livro.gênero.name }}</p>
         <!--    <p class="">Total de exemplares: {{ livro.total_copias }}</p> -->
-        <p> Disponíveis: {{ livro.copias_disponiveis }}</p>
+        <p class="copias"> Disponíveis: {{ livro.copias_disponiveis }}</p>
 
       </div>
      
